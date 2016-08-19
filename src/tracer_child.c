@@ -12,10 +12,7 @@ int main(int argc , char* argv[]){
   sprintf(string_ppid, "%d",ppid);
   strcat(path,string_ppid);
   strcat(path,"/maps");
-  char *hippy_tag_line = {"HIPPY"};
-  char *hippy_tag_start = {"HIPPY-START"};
-  char *hippy_tag_end = {"HIPPY-END"};
-
+  char *hippy_tag = {"hippy-d75d6fc7"};
   char heap_start_address[30] = {0};
   char heap_end_address[30] = {0};
   int cont = 0;
@@ -53,9 +50,8 @@ int main(int argc , char* argv[]){
   fprintf(f,"0x%s\n",heap_start_address);
   fprintf(f,"0x%s\n",heap_end_address);
   fclose(f);
-
-  fprintf(stderr,"[%s]\n",hippy_tag_start);
-  fprintf(stderr,"[%s]HEAP ADDRESS RANGE: 0x%s - 0x%s\n[%s]\n",hippy_tag_line,heap_start_address,heap_end_address,hippy_tag_end);
+  
+  fprintf(stderr,"<%s>\n{type: \"procinfo\",heap_range: {heap_start_address: \"0x%zx\",heap_end_address: \"0x%zx\"}}\n</%s>\n",hippy_tag,heap_start_address,heap_end_address,hippy_tag);
 
   /*
   char *ptr;

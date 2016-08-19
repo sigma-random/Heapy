@@ -1,0 +1,84 @@
+
+<hippy-d75d6fc7>  
+{
+  type: "procinfo",
+  heap_range: {
+    heap_start_address: "0x08045999",
+    heap_end_address: "0x08045123"
+  },
+  glibc_range: {
+    glibc_start_address: "0x08045555",
+    glibc_end_address: "0x93913213"
+  }
+}
+</hippy-d75d6fc7>
+
+
+<hippy-d75d6fc7>
+{
+  type: "apicall",
+  api_name: "malloc",
+  api_counter: "4",
+  api_args: {
+    user_size: "56"
+  },
+  api_info:{
+    usable_size: "64"
+  },
+  api_return: "0x08044444"
+}
+</hippy-d75d6fc7>
+
+
+<hippy-d75d6fc7>
+{
+  type: "apicall",
+  api_name: "free",
+  api_counter: "4",
+  api_args: {
+    chunk_addr: "0x08065456"
+  }
+}
+</hippy-d75d6fc7>
+
+
+<hippy-d75d6fc7>
+{
+  type: "apicall",
+  api_name: "calloc",
+  api_counter: "4",
+  api_args:{
+    nmemb: "6",
+    membsize: "20"
+  },
+  api_info:{
+    usable_chunk_size: "124"
+  },
+  api_return: "0x08044444"
+}
+</hippy-d75d6fc7>
+
+
+<hippy-d75d6fc7>
+{
+  type: "apicall",
+  api_name: "realloc",
+  api_counter: "4",
+  api_args:{
+    address: "0x08044444",
+    newsize: "20000"
+  },
+  api_info:{
+    usable_chunk_size: "124",
+    internal_api_call:{
+        type: "apicall",
+        api_name: "free",
+        api_counter: "4",
+        api_args: {
+             chunk_addr: "0x08065456"
+        }
+    }
+  },
+  api_return: "0x080455564"
+}
+</hippy-d75d6fc7>

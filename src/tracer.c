@@ -30,9 +30,7 @@ int first_allocation = 0;
 size_t heap_start_address = NULL;
 size_t heap_end_adddress = NULL;
 int hook_off = 0;
-char *hippy_tag_line = {"HIPPY"};
-char *hippy_tag_start = {"HIPPY-START"};
-char *hippy_tag_end = {"HIPPY-END"};
+char *hippy_tag = {"hippy-d75d6fc7"};
 int api_counter = 0; //this will be used later for the corrispondence between dumps and logs
 char *envp[] = {0};
 char *argv[] = {0};
@@ -117,9 +115,8 @@ void *malloc(size_t size)
       first_allocation = 1; // erase the firts allocation flag
     }
 
-    fprintf(stderr, "\n[%s]\n[%s]APIcounter: %zd\n[%s]malloc(%zd) = ", hippy_tag_start,hippy_tag_line,api_counter,hippy_tag_line,size);
-    fprintf(stderr, "%p\n", ret_addr);
-    fprintf(stderr,"[%s]usable size: (%zd|0x%zx)\n[%s]\n\n", hippy_tag_line,usable_size,usable_size,hippy_tag_end);
+    fprintf(stderr, "\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"malloc\",\"api_counter\": \"%zd\",\"api_args\": { \"size\": \"%zd\" },\"api_info\":{\"usable_chunk_size\": \"%zd\"},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
+            hippy_tag,api_counter,size,usable_size,ret_addr,hippy_tag);
 
     dump_heap();
     return ret_addr;
@@ -142,8 +139,8 @@ void free(void* addr)
       return;
     }
 
-    fprintf(stderr, "\n[%s]\n[%s]APIcounter: %zd\n[%s]free(0x%zx)\n[%s]\n\n", hippy_tag_start,hippy_tag_line,api_counter,hippy_tag_line,addr,hippy_tag_end);
     real_free(addr);
+    fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"free\",\"api_counter\": \"%zd\", \"api_args\": { \"address\": \"0x%zx\"}}\n</%s>\n\n",hippy_tag,api_counter,addr,hippy_tag);
 
     dump_heap();
     return;
@@ -174,9 +171,8 @@ void *calloc(size_t nmemb, size_t size)
       first_allocation = 1;
     }
 
-    fprintf(stderr, "\n[%s]\n[%s]APIcounter: %zd\n[%s]calloc(%zd, %zd) = ",hippy_tag_start,hippy_tag_line,api_counter,hippy_tag_line, nmemb,size);
-    fprintf(stderr, "%p\n", ret_addr);
-    fprintf(stderr,"usable size: (%zd|0x%zx)\n[%s]\n\n", usable_size,usable_size,hippy_tag_end);
+    fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"calloc\",\"api_counter\":\"%zd\",  \"api_args\":{ \"nmemb\": \"%zd\", \"membsize\": \"%zd\"},\"api_info\":{\"usable_chunk_size\": \"%zd\"},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
+             hippy_tag,api_counter,nmemb,size,usable_size,ret_addr,hippy_tag);
 
     dump_heap();
     return;
@@ -207,17 +203,15 @@ void *realloc(void* addr, size_t size)
       first_allocation = 1;
     }
 
-    fprintf(stderr, "\n[%s]\n[%s]APIcounter: %zd\n[%s]realloc(0x%zx, %zd) = ", hippy_tag_start,hippy_tag_line,api_counter,hippy_tag_line,addr,size);
-    fprintf(stderr, "0x%zx\n", ret_addr);
-    fprintf(stderr,"[%s]usable size: (%zd|0x%zx)\n", hippy_tag_line,usable_size,usable_size);
-
     // in this case the chunk has been moved in another position in memory
     // and the documentation says that the old chunk is freed, so we must register a free
     if(ret_addr !=  addr){
-      fprintf(stderr, " [%s]free(0x%zx) ",hippy_tag_line,addr);
+      fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"realloc\",\"api_counter\":\"%zd\",\"api_args\":{\"address\": \"0x%zx\", \"size\": \"%zd\"},\"api_info\":{ \"usable_chunk_size\": \"%zd\", \"internal_api_call\":{\"type\": \"apicall\", \"api_name\": \"free\", \"api_args\": {\"address\": \"0x%zx\"}}},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
+                hippy_tag,api_counter,addr,size,usable_size,addr,ret_addr,hippy_tag);
+    }else{
+      fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"realloc\",\"api_counter\":\"%zd\",\"api_args\":{\"address\": \"0x%zx\", \"size\": \"%zd\"},\"api_info\":{ \"usable_chunk_size\": \"%zd\"},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
+                hippy_tag,api_counter,addr,size,usable_size,ret_addr,hippy_tag);
     }
-
-    fprintf(stderr,"\n[%s]\n\n",hippy_tag_end);
 
     dump_heap();
     return;

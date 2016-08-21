@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE, STDOUT
 import json
+import copy
 import pdb
 
 tag_hippy_start = "<hippy-d75d6fc7>"
@@ -43,12 +44,12 @@ class State(list):
             return i,chunk
      return -1 # well, chunk not found in the state
 
- def toString(self):
-     print "********State********\n"
-     print "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n"
+ def __str__(self):
+     repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n"
      for chunk in self:
-         chunk.toString()
-     print "*********************\n"
+         repr+=chunk.__str__()
+     repr+= "*********************\n"
+     return repr
 
 
 
@@ -70,8 +71,8 @@ class Chunk():
          return "large chunk"
      return ""
 
- def toString(self):
-     print "------CHUNK------\n[+]addr: " + self.addr + "\n[+]raw_addr: " + self.raw_addr +"\n[+]size: " + self.size + "\n[+]raw_size: " + self.raw_size + "\n[+]type: " + self.type + "\n-----------------\n"
+ def __str__(self):
+     return "------CHUNK------\n[+]addr: " + self.addr + "\n[+]raw_addr: " + self.raw_addr +"\n[+]size: " + self.size + "\n[+]raw_size: " + self.raw_size + "\n[+]type: " + self.type + "\n-----------------\n"
 
 
 def parseProgramOut(output):
@@ -90,7 +91,7 @@ def parseProgramOut(output):
 
 def malloc(state,api_args,api_info,api_ret):
     chunk = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
-    state.api_now = "malloc( " + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
+    state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
     state.append(chunk)
 
 def free(state,api_args,api_info,api_ret):
@@ -134,8 +135,7 @@ def buildTimeline():
         op = operations[api_name]
         state = timeline[-1]
         op(state,api_args,api_info,api_ret)
-        state.toString()
-        timeline.append(state)
+        timeline.append(copy.deepcopy(state))
 
 '''
  Retrieve information about the process
@@ -169,3 +169,8 @@ if __name__ == '__main__':
  parseProgramOut(content)
  procInfo = buildProcInfo()
  buildTimeline()
+ cont = 0
+ for s in timeline:
+     print "timeline[" + str(cont) + "]:\n"
+     print s
+     cont+=1

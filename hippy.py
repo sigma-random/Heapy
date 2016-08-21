@@ -1,9 +1,10 @@
 from subprocess import Popen, PIPE, STDOUT
 import json
-import platform
+import pdb
 
 tag_hippy_start = "<hippy-d75d6fc7>"
 tag_hippy_end   = "</hippy-d75d6fc7>"
+dump_name       = "heap_dump_X"
 
 api_call_json = []
 proc_info_json = None
@@ -31,15 +32,24 @@ class State(list):
 
  def __init__(self):
   self.errors = []
+  self.api_now = ""
   self.info = []
-  self.dump_id = -1 # this in order to correlate a State with a taken dump
+  self.dump_name = "" # this in order to correlate a State with a taken dump
   return
 
  def getChunkAt(self,address):
      for i,chunk in enumerate(self):
          if chunk.addr == address:
-            return i
+            return i,chunk
      return -1 # well, chunk not found in the state
+
+ def toString(self):
+     print "********State********\n"
+     print "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n"
+     for chunk in self:
+         chunk.toString()
+     print "*********************\n"
+
 
 
 class Chunk():
@@ -60,6 +70,10 @@ class Chunk():
          return "large chunk"
      return ""
 
+ def toString(self):
+     print "------CHUNK------\n[+]addr: " + self.addr + "\n[+]raw_addr: " + self.raw_addr +"\n[+]size: " + self.size + "\n[+]raw_size: " + self.raw_size + "\n[+]type: " + self.type + "\n-----------------\n"
+
+
 def parseProgramOut(output):
  print_next_line = 0
  for line in output:
@@ -76,6 +90,7 @@ def parseProgramOut(output):
 
 def malloc(state,api_args,api_info,api_ret):
     chunk = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
+    state.api_now = "malloc( " + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
     state.append(chunk)
 
 def free(state,api_args,api_info,api_ret):
@@ -87,7 +102,7 @@ def free(state,api_args,api_info,api_ret):
         del state[index] # remove the chunk from the State!
 
 def calloc(state,api_args,api_info,api_ret):
-    api_args['user_size'] = str(int(api_args['nmemb'],10) * int(api_args['membsize'],10))
+    api_args['size'] = str(int(api_args['nmemb'],10) * int(api_args['membsize'],10))
     malloc(state,api_args,api_info,api_ret)
 
 def realloc(state,api_args,api_info,api_ret):
@@ -113,11 +128,13 @@ def buildTimeline():
     for djson in api_call_json:
         api_name = djson['api_name']
         api_args = djson['api_args']
+        api_counter = djson['api_counter']
         api_info = djson.get('api_info',[])
         api_ret  = djson.get('api_return',[])
         op = operations[api_name]
         state = timeline[-1]
         op(state,api_args,api_info,api_ret)
+        state.toString()
         timeline.append(state)
 
 '''
@@ -152,4 +169,3 @@ if __name__ == '__main__':
  parseProgramOut(content)
  procInfo = buildProcInfo()
  buildTimeline()
- print timeline

@@ -1,0 +1,4 @@
+
+1) track the splitting of chunk 
+2) get the address of glibc and dump the memory of libc in order to retrieve the bins 
+3) graphics 

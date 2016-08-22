@@ -5,7 +5,7 @@ import pdb
 
 tag_hippy_start = "<hippy-d75d6fc7>"
 tag_hippy_end   = "</hippy-d75d6fc7>"
-dump_name       = "heap_dump_X"
+dump_name       = "heap_dump_"
 
 api_call_json = []
 proc_info_json = None
@@ -89,41 +89,55 @@ def parseProgramOut(output):
      if tag_hippy_start in line:
          print_next_line = 1
 
-def malloc(state,api_args,api_info,api_ret):
+def malloc(state,api_args,api_info,api_ret,api_counter):
     chunk = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
-    state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
+    if state.api_now == "":
+        state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
+    if state.dump_name == "":
+        state.dump_name = dump_name + api_counter
     state.append(chunk)
 
-def free(state,api_args,api_info,api_ret):
+def free(state,api_args,api_info,api_ret,api_counter):
     freed_address = api_args['address']
     if freed_address == "0":
         return
     else:
         index,res = state.getChunkAt(freed_address)
+        if state.api_now == "":
+            state.api_now = "free(" + freed_address + ")"
+        if state.dump_name == "":
+            state.dump_name = dump_name + api_counter
         del state[index] # remove the chunk from the State!
 
-def calloc(state,api_args,api_info,api_ret):
+def calloc(state,api_args,api_info,api_ret,api_counter):
     api_args['size'] = str(int(api_args['nmemb'],10) * int(api_args['membsize'],10))
-    malloc(state,api_args,api_info,api_ret)
+    state.api_now = "calloc(" + api_args['nmemb'] + "," + api_args['membsize'] + ") = " + api_ret
+    if state.dump_name == "":
+        state.dump_name = dump_name + api_counter
+    malloc(state,api_args,api_info,api_ret,None)
 
-def realloc(state,api_args,api_info,api_ret):
+def realloc(state,api_args,api_info,api_ret,api_counter):
     address_to_realloc = api_args['address']
     newsize = api_args['size']
 
     if address_to_realloc == "0":
         malloc(state,api_args,api_info,api_ret)
     elif newsize == "0":
-        free(state,api_args,None,None)
+        free(state,api_args,None,None,None)
     else:
         index,res = state.getChunkAt(address_to_realloc) # let's search the chunk that has been reallocated
         if api_ret == address_to_realloc:
             state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
+            state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+            state.dump_name = dump_name + api_counter
         else:
             new_api_args = {}
             new_api_args['address'] = api_info['internal_api_call']['api_args']['address']
-            free(state,new_api_args,None,None)
-            timeline.append(state) # keep track of this free performed by the realloc
-            malloc(state,api_args,api_info,api_ret)
+            state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+            state.dump_name = dump_name + api_counter
+            free(state,new_api_args,None,None,None)
+            malloc(state,api_args,api_info,api_ret,None)
+
 
 def buildTimeline():
     for djson in api_call_json:
@@ -134,7 +148,11 @@ def buildTimeline():
         api_ret  = djson.get('api_return',[])
         op = operations[api_name]
         state = timeline[-1]
-        op(state,api_args,api_info,api_ret)
+        state.api_now = ""
+        state.dump_name = ""
+        state.info = []
+        state.errors = []
+        op(state,api_args,api_info,api_ret,api_counter)
         timeline.append(copy.deepcopy(state))
 
 '''
@@ -158,18 +176,24 @@ timeline = [State()]  # a timeline is a list of State
 
 if __name__ == '__main__':
 
- '''
  cmd = 'LD_PRELOAD=./tracer.so ./trace_me32'
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()
- print output
- '''
- with open("./traced_out_sample") as f:
-  content = f.readlines()
+
+
+ with open("./traced_out", "w") as f:
+     f.write(output)
+
+ f = open("./traced_out")
+ content = f.readlines()
+ f.close()
+
  parseProgramOut(content)
  procInfo = buildProcInfo()
  buildTimeline()
- cont = 0
+ timeline = timeline[:-1] # remove last state
+ cont = 1
+
  for s in timeline:
      print "timeline[" + str(cont) + "]:\n"
      print s

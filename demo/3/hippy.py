@@ -63,7 +63,7 @@ class Chunk():
 
  def getChunkType(self,raw_size):
      raw_size = int(raw_size,10)
-     if raw_size >= 8 and raw_size <= 80:
+     if raw_size >= 8 and raw_size <= 80: # TODO: see sploitfun tutorial for correct parametric range
          return "fast_chunk"
      if raw_size > 80 and raw_size < 512:
          return "small chunk"
@@ -180,7 +180,7 @@ if __name__ == '__main__':
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()
 
-
+ # dump the output on file in order to lately read it line by line
  with open("./traced_out", "w") as f:
      f.write(output)
 

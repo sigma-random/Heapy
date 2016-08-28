@@ -2,6 +2,7 @@ from subprocess import Popen, PIPE, STDOUT
 import json
 import copy
 import pdb
+import sys
 
 tag_hippy_start = "<hippy-d75d6fc7>"
 tag_hippy_end   = "</hippy-d75d6fc7>"
@@ -16,8 +17,8 @@ class ProcInfo():
   self.architecture         = binaryarch  # binary is 32 or 64 bit?
   self.heap_start_address   = hstart
   self.heap_end_address     = hend
-  self.glibc_start_address  = libcstart
-  self.glibc_end_address    = libcend
+  self.libc_start_address   = libcstart
+  self.libc_end_address     = libcend
   return
 
  def getArchMutiplier(self):
@@ -25,7 +26,9 @@ class ProcInfo():
          return 2
      else:
          return 1
-
+ def __str__(self):
+     repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
+     return repr
 '''
  This is a list of chunks currently allocated in a State
 '''
@@ -164,19 +167,55 @@ def buildProcInfo():
     if  heap_range != []:
         heap_start_address  = heap_range['heap_start_address']
         heap_end_address    = heap_range['heap_end_address']
-    #if proc_info_json.get('glibc_range',[]) != []:
-    #    glibc_start_address = djson['glibc_start_address']
-    #    glibc_end_address   = djson['glibc_end_address']
+    libc_range = proc_info_json.get('libc_range',[])
+    if libc_range != []:
+        libc_start_address = libc_range['libc_start_address']
+        libc_end_address   = libc_range['libc_end_address']
     arch = proc_info_json['arch']
-    return ProcInfo(heap_start_address,heap_end_address,"","",arch)
+    return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
+
+def buildHtml(timeline):
+    return ""
 
 operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': realloc}
 procInfo = None
 timeline = [State()]  # a timeline is a list of State
 
+def Usage():
+ print "Usage: python hippy.py <program> [<input_file_name>]\n"
+ sys.exit(0)
+
 if __name__ == '__main__':
 
- cmd = 'LD_PRELOAD=./tracer.so ./trace_me32'
+ trace_me   = ""   # program to be traced
+ input_4_me = ""   # input file for the traced program
+ tracer     = ""   # path of the tracer 32/64 bits ( based on the file traced )
+
+ if len(sys.argv) == 2:
+     trace_me = sys.argv[1]
+     cmd = 'LD_PRELOAD=./XXX ' + trace_me
+
+ elif len(sys.argv) == 3:
+     trace_me = sys.argv[1]
+     input_4_me = sys.argv[2]
+     cmd = 'LD_PRELOAD=XXX ' + trace_me  + " < " + input_4_me
+ else:
+     Usage()
+
+ cmd_file = "file " + trace_me
+ p = Popen(cmd_file, shell=True, stdout=PIPE, close_fds=True)
+ output = p.stdout.read()
+
+ if "ELF 64-bit" in output:
+     tracer = "/home/degrigis/Project/Hippy/bin/amd64/tracer.so"
+ elif "ELF 32-bit" in output:
+     tracer = "/home/degrigis/Project/Hippy/bin/i386/tracer.so"
+ else:
+     print "[ERROR] File not supported for tracing!"
+     sys.exit(0)
+
+ cmd = cmd.replace("XXX",tracer)
+ 
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()
 
@@ -190,6 +229,7 @@ if __name__ == '__main__':
 
  parseProgramOut(content)
  procInfo = buildProcInfo()
+ print procInfo
  buildTimeline()
  timeline = timeline[:-1] # remove last state
  cont = 1
@@ -198,3 +238,5 @@ if __name__ == '__main__':
      print "timeline[" + str(cont) + "]:\n"
      print s
      cont+=1
+
+ buildHtml(timeline)

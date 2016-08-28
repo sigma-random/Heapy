@@ -217,7 +217,7 @@ if __name__ == '__main__':
  cmd = cmd.replace("XXX",tracer)
  print cmd
  sys.exit(0)
-
+ 
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()
 

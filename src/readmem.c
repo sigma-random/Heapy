@@ -2,31 +2,43 @@
 
 #define BLOCK_SIGNALS 1
 
-/*
-Returns
-	0: success,
-	1: general failure,
-	2: argument issue,
-	3: attach failed, try again
-*/
+char heap_dump_filename[40];
+char libc_dump_filename[40];
+char dump_index_string[10];
+
 int main(int argc, char **argv)
 {
 	char start_heap[30];
 	char end_heap[30];
+	char start_libc[30];
+	char end_libc[30];
 	char s_pid[16];
-	char heap_dump_filename[40] = {"./HeapDumps/heap_dump_"};
-	char dump_index_string[10];
+
 	int dump_index;
 	struct stat st = {0};
+
+	memset(heap_dump_filename,0,40);
+	memset(libc_dump_filename,0,40);
+	memset(dump_index_string,0,10);
+
+	strncpy(heap_dump_filename,"./HeapDumps/heap_dump_",22);
+	strncpy(libc_dump_filename,"./LibcDumps/libc_dump_",22);
+
 
 	if (stat("./HeapDumps", &st) == -1) {
     mkdir("./HeapDumps", 0700);
 	}
 
-	FILE *heap_log = fopen("./heap_log","r");
+	if (stat("./LibcDumps", &st) == -1) {
+		mkdir("./LibcDumps", 0700);
+	}
+
+	FILE *heap_log = fopen("./heap_log","r"); // let's open the heap_log in order to retrieve the heap range
 	fscanf(heap_log,"%s",s_pid);
 	fscanf(heap_log,"%s", start_heap);
 	fscanf(heap_log,"%s", end_heap);
+	fscanf(heap_log,"%s", start_libc);
+	fscanf(heap_log,"%s", end_libc);
 	fclose(heap_log);
 
 	FILE *dump_log = fopen("./dump_log","r"); // take from here info about the name of the next dump
@@ -39,21 +51,30 @@ int main(int argc, char **argv)
 		fclose(dump_log);
 	}
 
+	// --------------------------------------------------------------------------------
+  // Handling of the dump of the heap
+	// --------------------------------------------------------------------------------
+
 	dump_index += 1; // increment the dump counter
 	dump_log = fopen("./dump_log","w");
 	fprintf(dump_log,"%d\n",dump_index); //update the dump_log
 	fclose(dump_log);
 
-	strcat(heap_dump_filename,dump_index_string); // compose the name of the dump
+	strcat(heap_dump_filename,dump_index_string); // compose the name of the dump for the heap
+	strcat(libc_dump_filename,dump_index_string); // compose the name of the dump for the libc
 
 	pid_t const pid = atoi(s_pid);
 	size_t heap_start_value = strtoull(start_heap, NULL, 16);
   size_t heap_end_value   = strtoull(end_heap, NULL, 16);
+	size_t libc_start_value = strtoul(start_libc,NULL,16);
+	size_t libc_end_value = strtoul(end_libc,NULL,16);
+
 	size_t const size =  heap_end_value - heap_start_value;
+	size_t const libc_size =  libc_end_value - libc_start_value;
 
 	//fprintf(stderr,"Dumping from 0x%zx to 0x%zx, size: 0x%zx, process pid: %zd\n",heap_start_value,heap_end_value,size,pid);
 
-	if (pid <= 0 || heap_start_value == ULONG_MAX || size == ULONG_MAX)
+	if (pid <= 0 || heap_start_value == ULONG_MAX || size == ULONG_MAX || libc_start_value == ULONG_MAX || libc_end_value == ULONG_MAX)
 	{
 		fprintf(stderr, "Invalid heap start address or size\n");
 		return 2;
@@ -142,8 +163,36 @@ int main(int argc, char **argv)
 	}
 
 	fclose(dump_file);
-	free(mempath);
-  ptrace(PTRACE_DETACH, pid, NULL, NULL);
 
+	ret = lseek64(memfd,libc_start_value,SEEK_SET);
+	dump_file = fopen(libc_dump_filename, "a");
+	row_count = 3;
+	for(p_addr = libc_start_value; p_addr < libc_end_value; p_addr+=4){
+		  if(row_count == 3){
+				fprintf(dump_file,"0x%zx ",p_addr);
+			}
+			read(memfd,&a_byte_0,1);
+			read(memfd,&a_byte_1,1);
+			read(memfd,&a_byte_2,1);
+			read(memfd,&a_byte_3,1);
+			fprintf(dump_file,"%02x",a_byte_3);
+			fprintf(dump_file,"%02x",a_byte_2);
+			fprintf(dump_file,"%02x",a_byte_1);
+			fprintf(dump_file,"%02x",a_byte_0);
+
+			if(row_count == 0){
+				fprintf(dump_file,"\n");
+				row_count = 3;
+			}
+			else{
+				fprintf(dump_file," ");
+				row_count--;
+			}
+	}
+
+	fclose(dump_file);
+	free(mempath);
+
+  ptrace(PTRACE_DETACH, pid, NULL, NULL);
 	return 0;
 }

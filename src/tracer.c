@@ -1,5 +1,5 @@
 /*
- http://elinux.org/images/b/b5/Elc2013_Kobayashi.pdf
+ hxxp://elinux.org/images/b/b5/Elc2013_Kobayashi.pdf
  COMPILE: gcc -shared -fPIC -o tracer.so tracer.c -ldl
  RUN: LD_PRELOAD=./tracer.so /home/degrigis/Desktop/datastore/datastore < /home/degrigis/Desktop/datastore/inputs_test
 
@@ -13,7 +13,7 @@
  with ltrace I can't see these chunks!
 
 The difference of the behavior of the heap allocation in a 32 and 64 bit programs strongly depend on the
-tuning parameter M_MXFAST ( http://man7.org/linux/man-pages/man3/mallopt.3.html ).
+tuning parameter M_MXFAST ( hxxp://man7.org/linux/man-pages/man3/mallopt.3.html ).
 Basically if chunks are smaller than 64*sizeof(size_t)/4 they are never freeded but kept inside the fastbin
 ready to be allocated.
 */

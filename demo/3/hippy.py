@@ -193,12 +193,12 @@ if __name__ == '__main__':
 
  if len(sys.argv) == 2:
      trace_me = sys.argv[1]
-     cmd = 'LD_PRELOAD=./XXX ' + trace_me
+     cmd = 'LD_PRELOAD=\"XXX\" ' + trace_me
 
  elif len(sys.argv) == 3:
      trace_me = sys.argv[1]
      input_4_me = sys.argv[2]
-     cmd = 'LD_PRELOAD=XXX ' + trace_me  + " < " + input_4_me
+     cmd = 'LD_PRELOAD=\"XXX\" ' + trace_me  + " < " + input_4_me
  else:
      Usage()
 
@@ -215,7 +215,8 @@ if __name__ == '__main__':
      sys.exit(0)
 
  cmd = cmd.replace("XXX",tracer)
- 
+ print cmd
+
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()
 

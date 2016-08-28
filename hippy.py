@@ -187,36 +187,7 @@ def Usage():
 
 if __name__ == '__main__':
 
- trace_me   = ""   # program to be traced
- input_4_me = ""   # input file for the traced program
- tracer     = ""   # path of the tracer 32/64 bits ( based on the file traced )
-
- if len(sys.argv) == 2:
-     trace_me = sys.argv[1]
-     cmd = 'LD_PRELOAD=./XXX ' + trace_me
-
- elif len(sys.argv) == 3:
-     trace_me = sys.argv[1]
-     input_4_me = sys.argv[2]
-     cmd = 'LD_PRELOAD=XXX ' + trace_me  + " < " + input_4_me
- else:
-     Usage()
-
- cmd_file = "file " + trace_me
- p = Popen(cmd_file, shell=True, stdout=PIPE, close_fds=True)
- output = p.stdout.read()
-
- if "ELF 64-bit" in output:
-     tracer = "/home/degrigis/Project/Hippy/bin/amd64/tracer.so"
- elif "ELF 32-bit" in output:
-     tracer = "/home/degrigis/Project/Hippy/bin/i386/tracer.so"
- else:
-     print "[ERROR] File not supported for tracing!"
-     sys.exit(0)
-
- cmd = cmd.replace("XXX",tracer)
- print cmd
- sys.exit(0)
+ cmd = "LD_PRELOAD=./tracer.so ./datastore < ./inputs-test2"
 
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()

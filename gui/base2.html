@@ -1,0 +1,129 @@
+<html>
+<head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script type='text/javascript'>
+  $(window).load(function(){
+  (function($) {
+      var element = $('.follow-scroll'),
+      originalY = element.offset().top;
+      maxBottom = element.offset().top + $('#heap_state').outerHeight()
+      var topMargin = 0;
+      element.css('position', 'relative');
+
+      $(window).on('scroll', function(event) {
+
+          var scrollTop = $(window).scrollTop();
+          element.stop(false, false).animate({
+              top: scrollTop < originalY
+                      ? 0
+                      : scrollTop - originalY + topMargin
+          }, 100);
+
+      });
+  })(jQuery);
+  });
+
+  </script>
+  </script>
+  <style>
+  .state {
+  margin: 0.5em;
+  background-color: white;
+  display:block;
+  overflow:auto;
+  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.80);
+  padding: 0.2em;
+  }
+
+  .info {
+  margin: 0.5em; padding: 0;
+  background-color: white;
+  border-radius: 0.3em;
+  display:block;
+  overflow:auto;
+  padding: 0.5em;
+  }
+
+  .dumps{
+  }
+
+  .hexdump {
+  margin: 0.5em; padding: 0;
+  background-color: white;
+  display:block;
+  overflow:auto;
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  }
+  </style>
+
+</head>
+<body>
+  <div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div id="info" class="info">
+        <center></center>
+      </div>
+      <hr>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <div id="heap_state" class="state">
+      </div>
+    </div>
+    <div class="col-md-10">
+    <div class="dumps follow-scroll">
+    <div class="row">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#" class="tablinks" onclick="showTab(event, 'Heap')">Heap</a></li>
+        <li><a href="#" onclick="showTab(event, 'Libc')">Libc</a></li>
+      </ul>
+        <div id="Heap" class="tabcontent">
+          <div class="col-md-12">
+            <div id="heapdump" class="hexdump">
+            </div>
+          </div>
+        </div>
+        <div id="Libc" class="tabcontent"  style='display: none'>
+          <div class="col-md-12">
+            <div id="libcdump" class="hexdump">
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>
+
+
+</body>
+</html>

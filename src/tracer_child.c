@@ -62,9 +62,7 @@ int main(int argc , char* argv[]){
     // searching for the .bss of the libc mapped in memory:
     // 7f6138cee000-7f6138cf0000 rw-p 001c3000 fc:01 13373861 /lib/x86_64-linux-gnu/libc-2.23.so
     if (libc_line = strstr(line, "libc-") != NULL && strstr(line, "rw-p") != NULL ) { // found the line in the /proc/<pid>/maps with the  bss libc information
-
-       printf("LINE: %s\n ", line);
-
+      
        libc_found = 1;
        char *c = line; // with this we extract the address range
 

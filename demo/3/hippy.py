@@ -1,12 +1,15 @@
 from subprocess import Popen, PIPE, STDOUT
+from bs4 import BeautifulSoup
 import json
 import copy
-import pdb
 import sys
+import random
 
 tag_hippy_start = "<hippy-d75d6fc7>"
 tag_hippy_end   = "</hippy-d75d6fc7>"
 dump_name       = "heap_dump_"
+libc_dump_name  = "libc_dump_"
+gui_path        = "/home/degrigis/Project/Hippy/gui/base2.html"
 
 api_call_json = []
 proc_info_json = None
@@ -39,6 +42,7 @@ class State(list):
   self.api_now = ""
   self.info = []
   self.dump_name = "" # this in order to correlate a State with a taken dump
+  self.libc_dump_name = ""
   return
 
  def getChunkAt(self,address):
@@ -48,7 +52,7 @@ class State(list):
      return -1 # well, chunk not found in the state
 
  def __str__(self):
-     repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n"
+     repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n[+]libc_dump_name: " + self.libc_dump_name + "\n"
      for chunk in self:
          repr+=chunk.__str__()
      repr+= "*********************\n"
@@ -98,6 +102,8 @@ def malloc(state,api_args,api_info,api_ret,api_counter):
         state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
     if state.dump_name == "":
         state.dump_name = dump_name + api_counter
+    if state.libc_dump_name == "":
+        state.libc_dump_name = libc_dump_name + api_counter
     state.append(chunk)
 
 def free(state,api_args,api_info,api_ret,api_counter):
@@ -110,6 +116,8 @@ def free(state,api_args,api_info,api_ret,api_counter):
             state.api_now = "free(" + freed_address + ")"
         if state.dump_name == "":
             state.dump_name = dump_name + api_counter
+        if state.libc_dump_name == "":
+            state.libc_dump_name = libc_dump_name + api_counter
         del state[index] # remove the chunk from the State!
 
 def calloc(state,api_args,api_info,api_ret,api_counter):
@@ -117,6 +125,8 @@ def calloc(state,api_args,api_info,api_ret,api_counter):
     state.api_now = "calloc(" + api_args['nmemb'] + "," + api_args['membsize'] + ") = " + api_ret
     if state.dump_name == "":
         state.dump_name = dump_name + api_counter
+    if state.libc_dump_name == "":
+        state.libc_dump_name = libc_dump_name + api_counter
     malloc(state,api_args,api_info,api_ret,None)
 
 def realloc(state,api_args,api_info,api_ret,api_counter):
@@ -133,11 +143,13 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
             state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
             state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
             state.dump_name = dump_name + api_counter
+            state.libc_dump_name = libc_dump_name + api_counter
         else:
             new_api_args = {}
             new_api_args['address'] = api_info['internal_api_call']['api_args']['address']
             state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
             state.dump_name = dump_name + api_counter
+            state.libc_dump_name = libc_dump_name + api_counter
             free(state,new_api_args,None,None,None)
             malloc(state,api_args,api_info,api_ret,None)
 
@@ -153,6 +165,7 @@ def buildTimeline():
         state = timeline[-1]
         state.api_now = ""
         state.dump_name = ""
+        state.libc_dump_name = ""
         state.info = []
         state.errors = []
         op(state,api_args,api_info,api_ret,api_counter)
@@ -174,8 +187,37 @@ def buildProcInfo():
     arch = proc_info_json['arch']
     return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
 
+def random_color(r=200, g=200, b=125):
+
+    red = (random.randrange(0, 256) + r) / 2
+    green = (random.randrange(0, 256) + g) / 2
+    blue = (random.randrange(0, 256) + b) / 2
+    return (str(red), str(green), str(blue))
+
 def buildHtml(timeline):
-    return ""
+    for state in timeline:
+        soup = BeautifulSoup(open(gui_path))
+        div_info = soup.find(id="info") # insert the name of the api now
+        center_tag = soup.new_tag("center")
+        center_tag.string = state.api_now
+        div_info.append(center_tag)
+        for chunk in state:
+            r,g,b = random_color()
+            div_heap_state = soup.find(id="heap_state")
+            block_tag = soup.new_tag("div")
+            block_tag['class'] = "block normal"
+            block_layout = "width: 100%; height: 6%; background-color: rgb(RXXX, GXXX, BXXX);;"
+            block_layout = block_layout.replace("RXXX",r)
+            block_layout = block_layout.replace("GXXX",g)
+            block_layout = block_layout.replace("BXXX",b)
+            block_tag['style'] = block_layout
+            block_tag.string = chunk.addr
+            div_heap_state.append(block_tag)
+            html = soup.prettify("utf-8")
+            with open("output.html", "wb") as file:
+                file.write(html)
+            sys.exit(0)
+        return ""
 
 operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': realloc}
 procInfo = None

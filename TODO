@@ -1,6 +1,5 @@
 
 1) track the splitting of chunk 
-2) get the address of glibc and dump the memory of libc in order to retrieve the bins 
 3) graphics 
 4) gestire mallopt dipendente dall'architettura
 5) gestire il chunk type ( fast,small,large ) in base all'architettura ( i range in cui sono definiti i tipi di chunk cambiano )

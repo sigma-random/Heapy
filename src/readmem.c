@@ -138,9 +138,9 @@ int main(int argc, char **argv)
 
 	size_t ret = lseek64(memfd,heap_start_value,SEEK_SET);
 	FILE * dump_file = fopen(heap_dump_filename, "a");
-	int row_count = 3;
+	int row_count = 7; // 7 are 8 dwords per line 
 	for(p_addr = heap_start_value; p_addr < heap_end_value; p_addr+=4){
-		  if(row_count == 3){
+		  if(row_count == 7){
 				fprintf(dump_file,"0x%zx ",p_addr);
 			}
 			read(memfd,&a_byte_0,1);
@@ -154,7 +154,7 @@ int main(int argc, char **argv)
 
 			if(row_count == 0){
 				fprintf(dump_file,"\n");
-				row_count = 3;
+				row_count = 7;
 			}
 			else{
 				fprintf(dump_file," ");
@@ -166,9 +166,9 @@ int main(int argc, char **argv)
 
 	ret = lseek64(memfd,libc_start_value,SEEK_SET);
 	dump_file = fopen(libc_dump_filename, "a");
-	row_count = 3;
+	row_count = 7;
 	for(p_addr = libc_start_value; p_addr < libc_end_value; p_addr+=4){
-		  if(row_count == 3){
+		  if(row_count == 7){
 				fprintf(dump_file,"0x%zx ",p_addr);
 			}
 			read(memfd,&a_byte_0,1);
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 
 			if(row_count == 0){
 				fprintf(dump_file,"\n");
-				row_count = 3;
+				row_count = 7;
 			}
 			else{
 				fprintf(dump_file," ");

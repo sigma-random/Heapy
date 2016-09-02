@@ -4,6 +4,7 @@ import json
 import copy
 import sys
 import random
+import os
 
 tag_hippy_start = "<hippy-d75d6fc7>"
 tag_hippy_end   = "</hippy-d75d6fc7>"
@@ -43,6 +44,7 @@ class State(list):
   self.info = []
   self.dump_name = "" # this in order to correlate a State with a taken dump
   self.libc_dump_name = ""
+  self.color = []
   return
 
  def getChunkAt(self,address):
@@ -59,14 +61,34 @@ class State(list):
      return repr
 
 
-
+####################################################################################
+#                                     chunk                                        #
+####################################################################################
+#
+#                                full_chunk_size
+# |--------------------------------------------------------------------------------|
+# |
+# |                                 raw_size ( returned from malloc)
+# |                     |----------------------------------------------------------|
+# |
+#                       size ( requested by user )
+# |                     |--------------------|
+# ----------------------------------------------------------------------------------
+# | size | N | M | PREV |           user_data         |   prev_size OR data        |
+# ----------------------------------------------------------------------------------
+# ^                     ^                                                          ^
+# raw_addr             addr                                                   chunk_end_addr
+#
 class Chunk():
- def __init__(self, addr, size, raw_size):
+ def __init__(self, addr, size, raw_size,color):
      self.addr = addr # start address of user data for this chunk
-     self.raw_addr = hex(int(addr,16) - procInfo.getArchMutiplier() * 8)  # this is the real start address of the chunk
+     self.raw_addr = hex(int(addr,16) - procInfo.getArchMutiplier() * 4)  # this is the real start address of the chunk
      self.size     = size     # size of the chunk as requested from the user
      self.raw_size = raw_size # raw size of the chunk ( the size returned from usable_size() )
+     self.full_chunk_size = str(int(raw_size,10) + procInfo.getArchMutiplier() * 4)
+     self.chunk_end_addr = hex((int(self.raw_addr,16) + int(self.full_chunk_size,10)))
      self.type     = self.getChunkType(raw_size)
+     self.color = color
 
  def getChunkType(self,raw_size):
      raw_size = int(raw_size,10)
@@ -79,7 +101,7 @@ class Chunk():
      return ""
 
  def __str__(self):
-     return "------CHUNK------\n[+]addr: " + self.addr + "\n[+]raw_addr: " + self.raw_addr +"\n[+]size: " + self.size + "\n[+]raw_size: " + self.raw_size + "\n[+]type: " + self.type + "\n-----------------\n"
+     return "------CHUNK------\n[+]addr: " + self.addr + "\n[+]raw_addr: " + self.raw_addr +"\n[+]size: " + self.size + "\n[+]raw_size: " + self.raw_size + "\n[+]full_chunk_size: " + self.full_chunk_size + "\n[+]chunk_end_addr: " + self.chunk_end_addr + "\n[+]type: " + self.type + "\n" + "[+]color: " + str(self.color) +  "\n-----------------\n"
 
 
 def parseProgramOut(output):
@@ -97,7 +119,7 @@ def parseProgramOut(output):
          print_next_line = 1
 
 def malloc(state,api_args,api_info,api_ret,api_counter):
-    chunk = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
+    chunk = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
     if state.api_now == "":
         state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
     if state.dump_name == "":
@@ -188,11 +210,81 @@ def buildProcInfo():
     return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
 
 def random_color(r=200, g=200, b=125):
-
     red = (random.randrange(0, 256) + r) / 2
     green = (random.randrange(0, 256) + g) / 2
     blue = (random.randrange(0, 256) + b) / 2
     return (str(red), str(green), str(blue))
+
+# this function will search the chunk inside the hex-dump taken
+def searchChunkInHexDump(chunk,start_addr_line,end_addr_line,hlog,line_counter):
+
+    r,g,b = chunk.color[0],chunk.color[1],chunk.color[2]
+    space_skip = 1 # number of space to skip in the .txt dump ( basically where we will put the tag for the color )
+    start_found = False
+    end_found = False
+
+    print "Searching chunk boundaries in this range " + hex(start_addr_line) + " - " + hex(end_addr_line) + "\n"
+
+    for _addr in xrange(start_addr_line,end_addr_line,4): # actually the last address checked here is int(splitted_line[0],16) + 0x1c, since xrange exclude the last boundary
+        print "Checking " + hex(_addr) + "\n"
+        if hex(_addr) == chunk.raw_addr:
+            color_div = "<font color = \"rgb(" + r + "," + g + "," + b +")\">"
+            log = str(line_counter) + "-" + str(space_skip) + "-" + color_div + "\n"
+            hlog.write(log)
+            start_found = True
+            print "FOUND START"
+        elif hex(_addr) == hex(int(chunk.chunk_end_addr,16) - 0x4): # this is the start address of the last dword of this chunk
+            end_color_div = "</font>"
+            log = str(line_counter) + "-" + str(space_skip) + "-" + end_color_div + "\n"
+            hlog.write(log)
+            end_found = True
+            print "FOUND END"
+
+        space_skip += 1
+
+    if start_found == True and end_found == True: # start addresss and end address in the same line
+        return 1
+    if start_found == True and end_found == False: # start address of the chunk is in this line
+        return 2
+    if start_found == False and end_found == True: # end address of the chunk is in this line
+        return 3
+
+
+def doHexDumpTag(chunk,dump_name):
+    logname = "./HexDumpTags.log"
+    if not os.path.exists(logname): # this log will be used in order to create the colored hexdump html
+        open(logname, 'w+').close()
+
+    hlog = open("./HexDumpTags.log","a")
+    r,g,b = chunk.color[0],chunk.color[1],chunk.color[2]
+
+    dump_path = "./HeapDumps/" + dump_name
+
+    with open(dump_path) as f:
+
+        line_counter = -1
+        start_found = False
+        end_found = False
+
+        for line in f:
+            line_counter += 1
+            splitted_line = line.split(" ")
+            start_addr_line = int(splitted_line[0],16)
+            end_addr_line   = int(splitted_line[0],16) + 0x20 # 0x20 coz we print 8 dword per line in the dumper
+            start_found = False
+
+            # let's try to search the boundary of this chunk inside the current line under analysis
+            res = searchChunkInHexDump(chunk,start_addr_line,end_addr_line,hlog,line_counter)
+
+            if res == 1:
+                return
+            if res == 2:
+                start_found = True
+                continue
+            if res == 3 and start_found == True:
+                return
+            else:
+                print "Something strange happen, skipping this chunk"
 
 def buildHtml(timeline):
     for state in timeline:
@@ -203,7 +295,7 @@ def buildHtml(timeline):
         div_info.append(center_tag)
 
         for chunk in state: # now let's append all the block related to chunks
-            r,g,b = random_color()
+            r,g,b = chunk.color[0],chunk.color[1],chunk.color[2]
             div_heap_state = soup.find(id="heap_state")
             block_tag = soup.new_tag("div")
             block_tag['class'] = "block normal"
@@ -215,17 +307,19 @@ def buildHtml(timeline):
             block_tag.string = chunk.addr
             div_heap_state.append(block_tag)
 
-            # TODO 
-            # now we have to paste the dump of the heap in the div "heapdump"
-            # first we have to tag the DWORD related to chunks with the color extracted
-            div_heap_dump = soup.find(id="heapdump")
+            # now we keep track on where we have to insert
+            # the tag in the hexdump in order to give a color to the dwords
+            doHexDumpTag(chunk,state.dump_name)
 
+            # now we have the number of space to skip to insert the tag of the color
 
+            '''
             html = soup.prettify("utf-8")
             with open("output.html", "wb") as file:
                 file.write(html)
-            sys.exit(0)
-        return ""
+            '''
+
+    return ""
 
 operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': realloc}
 procInfo = None

@@ -192,6 +192,9 @@ def buildTimeline():
         state.info = []
         state.errors = []
         op(state,api_args,api_info,api_ret,api_counter)
+
+        # here we have to sort the chunks in the state in order to lately print them correctly
+        
         timeline.append(copy.deepcopy(state))
 
 '''
@@ -210,7 +213,7 @@ def buildProcInfo():
     arch = proc_info_json['arch']
     return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
 
-def random_color(r=200, g=200, b=125):
+def random_color(r=100, g=100, b=125):
     red = (random.randrange(0, 256) + r) / 2
     green = (random.randrange(0, 256) + g) / 2
     blue = (random.randrange(0, 256) + b) / 2

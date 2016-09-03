@@ -62,7 +62,7 @@ class HippyGuiManager:
             block_layout = block_layout.replace("GXXX",g)
             block_layout = block_layout.replace("BXXX",b)
             block_tag['style'] = block_layout
-            block_tag.string = chunk.addr
+            block_tag.string = chunk.addr + "<br>" + chunk.type
             div_heap_state.append(block_tag)
 
         # finally the top chunk

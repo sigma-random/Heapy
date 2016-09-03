@@ -41,7 +41,7 @@ class HippyGuiManager:
         self.soup = []
 
 
-    # this function will write the curre api invoked and other information
+    # this function will write the current api invoked and other information
     # related to the state of the heap
     def write_state_info(self):
         div_info = self.soup.find(id="info") # insert the name of the api now

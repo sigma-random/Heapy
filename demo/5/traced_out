@@ -1,0 +1,72 @@
+
+
+<hippy-d75d6fc7>
+{"type": "procinfo","heap_range": {"heap_start_address": "0x09531000","heap_end_address": "0x09552000"}, "libc_range":                  {"libc_start_address": "0xf7767000","libc_end_address": "0xf7768000"}, "arch": "32"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "1","api_args": { "size": "990" },"api_info":{"usable_chunk_size": "996"},"api_return": "0x9531008"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "2", "api_args": { "address": "0x9531008"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "3","api_args": { "size": "4000" },"api_info":{"usable_chunk_size": "4004"},"api_return": "0x9531008"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "4","api_args": { "size": "1000" },"api_info":{"usable_chunk_size": "1004"},"api_return": "0x9531fb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "5", "api_args": { "address": "0x9531008"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "6","api_args": { "size": "2040" },"api_info":{"usable_chunk_size": "2044"},"api_return": "0x9531008"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "7","api_args": { "size": "1000" },"api_info":{"usable_chunk_size": "1004"},"api_return": "0x9531808"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "8", "api_args": { "address": "0x9531008"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "9","api_args": { "size": "1000" },"api_info":{"usable_chunk_size": "1004"},"api_return": "0x9531008"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "calloc","api_counter":"10",  "api_args":{ "nmemb": "25", "membsize": "1"},"api_info":{"usable_chunk_size": "28"},"api_return": "0x9531bf8"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "realloc","api_counter":"11","api_args":{"address": "0x9531008", "size": "20000"},"api_info":{ "usable_chunk_size": "20004", "internal_api_call":{"type": "apicall", "api_name": "free", "api_args": {"address": "0x9531008"}}},"api_return": "0x95323a0"}
+</hippy-d75d6fc7>
+

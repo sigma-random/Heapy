@@ -273,6 +273,7 @@ def doHexDumpTag(chunk,dump_name):
             end_addr_line   = int(splitted_line[0],16) + 0x20 # 0x20 coz we print 8 dword per line in the dumper
             start_found = False
 
+            # let's try to search the boundary of this chunk inside the current line under analysis
             res = searchChunkInHexDump(chunk,start_addr_line,end_addr_line,hlog,line_counter)
 
             if res == 1:
@@ -286,6 +287,7 @@ def doHexDumpTag(chunk,dump_name):
                 print "Something strange happen, skipping this chunk"
 
 def buildHtml(timeline):
+    
     for state in timeline:
         soup = BeautifulSoup(open(gui_path))
         div_info = soup.find(id="info") # insert the name of the api now
@@ -318,7 +320,7 @@ def buildHtml(timeline):
                 file.write(html)
             '''
 
-        return ""
+    return ""
 
 operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': realloc}
 procInfo = None
@@ -345,6 +347,7 @@ if __name__ == '__main__':
 
  parseProgramOut(content)
  procInfo = buildProcInfo()
+
  print procInfo
  buildTimeline()
  timeline = timeline[:-1] # remove last state

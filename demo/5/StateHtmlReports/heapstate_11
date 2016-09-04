@@ -72,7 +72,7 @@
       <center>
       </center>
       <center>
-       realloc(0x9d70008,20000) = 0x9d713a0
+       realloc(0x8881008,20000) = 0x88823a0
       </center>
      </div>
      <hr/>
@@ -81,17 +81,26 @@
    <div class="row">
     <div class="col-md-2">
      <div class="state" id="heap_state">
-      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(100, 171, 64);;">
-       0x9d70fb0&lt;br&gt;large chunk
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+       0x8881008-FREE-large chunk
       </div>
-      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(209, 199, 126);;">
-       0x9d70808&lt;br&gt;large chunk
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+       0x88813f8-FREE-large chunk
       </div>
-      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(121, 171, 76);;">
-       0x9d70bf8&lt;br&gt;fast_chunk
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(112, 125, 178);;">
+       0x8881808-large chunk
       </div>
-      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(142, 106, 73);;">
-       0x9d713a0&lt;br&gt;large chunk
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(58, 108, 113);;">
+       0x8881bf8-large chunk
+      </div>
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+       0x8881c18-FREE-large chunk
+      </div>
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(89, 118, 99);;">
+       0x8881fb0-large chunk
+      </div>
+      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(102, 173, 169);;">
+       0x88823a0-large chunk
       </div>
       <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(110, 118, 225);;">
        TOP CHUNK

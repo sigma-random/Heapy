@@ -41,7 +41,7 @@ class HippyGuiManager:
         self.soup = []
 
 
-    # this function will write the curre api invoked and other information
+    # this function will write the current api invoked and other information
     # related to the state of the heap
     def write_state_info(self):
         div_info = self.soup.find(id="info") # insert the name of the api now
@@ -53,17 +53,26 @@ class HippyGuiManager:
     # the square related to the heap chunks
     def build_heap_state(self):
         for chunk in self.current_state_obj: # now let's append all the block related to chunks
-            r,g,b = chunk.color[0],chunk.color[1],chunk.color[2]
-            div_heap_state = self.soup.find(id="heap_state")
-            block_tag = self.soup.new_tag("div")
-            block_tag['class'] = "block normal"
-            block_layout = "width: 100%; height: 6%; background-color: rgb(RXXX, GXXX, BXXX);;"
-            block_layout = block_layout.replace("RXXX",r)
-            block_layout = block_layout.replace("GXXX",g)
-            block_layout = block_layout.replace("BXXX",b)
-            block_tag['style'] = block_layout
-            block_tag.string = chunk.addr + "<br>" + chunk.type
-            div_heap_state.append(block_tag)
+            if chunk.status == "allocated":
+                r,g,b = chunk.color[0],chunk.color[1],chunk.color[2]
+                div_heap_state = self.soup.find(id="heap_state")
+                block_tag = self.soup.new_tag("div")
+                block_tag['class'] = "block normal"
+                block_layout = "width: 100%; height: 6%; background-color: rgb(RXXX, GXXX, BXXX);;"
+                block_layout = block_layout.replace("RXXX",r)
+                block_layout = block_layout.replace("GXXX",g)
+                block_layout = block_layout.replace("BXXX",b)
+                block_tag['style'] = block_layout
+                block_tag.string = chunk.addr + "-" + chunk.type
+                div_heap_state.append(block_tag)
+            else:
+                div_heap_state = self.soup.find(id="heap_state")
+                block_tag = self.soup.new_tag("div")
+                block_tag['class'] = "block normal"
+                block_layout = "width: 100%; height: 6%; background-color: rgb(255, 255, 255);;"
+                block_tag['style'] = block_layout
+                block_tag.string = chunk.addr + "-FREE" + "-" + chunk.type
+                div_heap_state.append(block_tag)
 
         # finally the top chunk
         div_heap_state = self.soup.find(id="heap_state")

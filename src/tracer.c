@@ -38,11 +38,26 @@ char *argv[] = {0};
 char * tracer_child_binary = {"./tracer_child"};
 char * dumper_binary = {"./readmem"};
 
+
+// original address of functions
+size_t real_func;
+void* (*real_malloc)(size_t) = NULL;
+void  (*real_free)(void*) = NULL;
+void* (*real_calloc)(size_t,size_t) = NULL;
+void* (*real_realloc)(void*,size_t) = NULL;
+
+uint16_t pid;
+uint16_t pid2;
+
 /*
  Executed during the loading of this library
 */
 __attribute__((constructor)) void tracer(){
-  //well, nothing for now
+  real_malloc = get_original("malloc");
+  real_free = get_original("free");
+  real_calloc = get_original("calloc");
+  real_realloc = get_original("realloc");
+
 }
 
 /*
@@ -51,7 +66,6 @@ __attribute__((constructor)) void tracer(){
 */
 static ssize_t get_original(char *func_name)
 {
-    size_t real_func;
     real_func = dlsym(RTLD_NEXT, func_name); //dlsym is without heap allocations
     if (NULL == real_func) {
         fprintf(stderr, "Error in `dlsym`: %s\n", dlerror());
@@ -65,7 +79,7 @@ static ssize_t get_original(char *func_name)
 // addresses of the heap just allocated
 static void handleFirstAllocation(){
 
-  uint16_t pid2 = fork(); // we are going to create another process in order to avoid to dirty the heap of
+  pid2 = fork(); // we are going to create another process in order to avoid to dirty the heap of
                           // the current one that we are tracing with allocations derived from fopen and friends!
 
   if(pid2 == 0){  // ok son, do the dirty job!
@@ -79,7 +93,7 @@ static void handleFirstAllocation(){
 
 static void dump_heap(){
 
-uint16_t pid = fork(); // fork is heap-allocation-free
+ pid = fork(); // fork is heap-allocation-free
 
 if(pid == 0){
   hook_off = 1;
@@ -95,16 +109,12 @@ if(pid == 0){
 */
 void *malloc(size_t size)
 {
-    api_counter++;
-    void* (*real_malloc)(size_t) = NULL;
-
-    if(real_malloc==NULL) {
-         real_malloc = get_original("malloc");
-    }
 
     if(hook_off == 1){
-      return real_malloc(size);
+        return real_malloc(size);
     }
+
+    api_counter++;
 
     void *ret_addr = NULL;
     ret_addr = real_malloc(size);
@@ -119,6 +129,7 @@ void *malloc(size_t size)
             hippy_tag,api_counter,size,usable_size,ret_addr,hippy_tag);
 
     dump_heap();
+
     return ret_addr;
 }
 
@@ -127,22 +138,19 @@ void *malloc(size_t size)
 */
 void free(void* addr)
 {
-    api_counter++;
-    void (*real_free)(void*) = NULL;
-
-    if(real_free==NULL) {
-        real_free = get_original("free");
-    }
-
+  
     if(hook_off == 1){
-      real_free(addr);
-      return;
+      return real_free(addr);
     }
+
+    api_counter++;
 
     real_free(addr);
+
     fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"free\",\"api_counter\": \"%zd\", \"api_args\": { \"address\": \"0x%zx\"}}\n</%s>\n\n",hippy_tag,api_counter,addr,hippy_tag);
 
     dump_heap();
+
     return;
 }
 
@@ -151,16 +159,11 @@ void free(void* addr)
 */
 void *calloc(size_t nmemb, size_t size)
 {
-    api_counter++;
-    void* (*real_calloc)(size_t,size_t) = NULL;
-
-    if(real_calloc==NULL) {
-        real_calloc = get_original("calloc");
-    }
-
     if(hook_off == 1){
       return real_calloc(nmemb,size);
     }
+
+    api_counter++;
 
     void *ret_addr = NULL;
     ret_addr = real_calloc(nmemb,size);
@@ -183,16 +186,12 @@ void *calloc(size_t nmemb, size_t size)
 */
 void *realloc(void* addr, size_t size)
 {
-    api_counter++;
-    void* (*real_realloc)(void*,size_t) = NULL;
-
-    if(real_realloc==NULL) {
-        real_realloc = get_original("realloc");
-    }
 
     if(hook_off == 1){
       return real_realloc(addr,size);
     }
+
+    api_counter++;
 
     void *ret_addr = NULL;
     ret_addr = real_realloc(addr,size);

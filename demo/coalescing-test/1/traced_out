@@ -1,0 +1,23 @@
+
+
+<hippy-d75d6fc7>
+{"type": "procinfo","heap_range": {"heap_start_address": "0x09be9000","heap_end_address": "0x09c0a000"}, "libc_range":                  {"libc_start_address": "0xf7799000","libc_end_address": "0xf779a000"}, "arch": "32"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "1","api_args": { "size": "4" },"api_info":{"usable_chunk_size": "12"},"api_return": "0x9be9008"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "2", "api_args": { "address": "0x9be9008"}}
+</hippy-d75d6fc7>
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "3","api_args": { "size": "100" },"api_info":{"usable_chunk_size": "100"},"api_return": "0x9be9018"}
+</hippy-d75d6fc7>
+

@@ -48,9 +48,10 @@ unsigned int a = malloc(1000);
 unsigned int c = malloc(1000);
 unsigned int d = malloc(4);
 unsigned int e = malloc(1000);
-free(a);
-free(c);
-free(d);
+unsigned int e1 = malloc(1000);
+unsigned int e2 = malloc(1000);
+free(e2);
 free(e);
+free(e1);
 unsigned int c1 = malloc(4);
 }

@@ -235,25 +235,86 @@ def check_malloc_consolidate(libc_dump_name):
                 return False
         line_cont += 1
 
-# coalesc together all the chunks that are not fastchunks
+
 def coalesc(state):
-    for i,chunk in enumerate(state):
-
-
-
-
-
-def docoalesc(state):
-    consolidate = False # this flag indicates if fastchunks must be coalesced or not ( this will be true only if malloc_consolidate has been called )
+    consolidate_all = False # this flag indicates if fastchunks must be coalesced or not ( this will be true only if malloc_consolidate has been called )
     if state.fastchunks_bit == 0: # if it is 0 let's check from the libc dump if it is now 1 again ( this would mean that a malloc_consolidate has been called )
         if check_malloc_consolidate(state.libc_dump_name) == True:
-            consolidate = True
-    if consolidate == True:
-        coalescAndConsolidate(state)
-    else
-        coalesc(state)
+            consolidate_all = True
 
     to_coalesc = [] # list of address to coalesc
+
+    if consolidate_all == True:
+        for i,chunk in enumerate(state):
+            if chunk.status == "free": # if this chunk is free put it in the list of adjacent chunk to coalesc
+                to_coalesc.append(i)
+                print len(to_coalesc)
+            elif chunk.status == "allocated" and len(to_coalesc) > 1: # in this case we have stuff to coalesc
+                first_index = to_coalesc[0]
+                first_chunk = state[first_index]
+                new_size = first_chunk.size
+                new_raw_size = first_chunk.raw_size
+                to_coalesc.pop(0)
+                for c in to_coalesc:
+                    new_size = new_size + state[c].size
+                    new_raw_size = new_raw_size + state[c].raw_size
+                state[first_index] =  Chunk(first_chunk.addr,new_size,new_raw_size,random_color(),"free")
+
+                for x in sorted(to_coalesc,reverse=True):
+                    del state[x]
+
+                to_coalesc = []
+
+        # any chunk to coalesc remain?
+        if len(to_coalesc) > 1:
+            first_index = to_coalesc[0]
+            first_chunk = state[first_index]
+            new_size = first_chunk.size
+            new_raw_size = first_chunk.raw_size
+            to_coalesc.pop(0)
+            for c in to_coalesc:
+                new_size = new_size + state[c].size
+                new_raw_size = new_raw_size + state[c].raw_size
+            state[first_index] =  Chunk(first_chunk.addr,new_size,new_raw_size,random_color(),"free")
+
+            for x in sorted(to_coalesc,reverse=True):
+                del state[x]
+
+    else:
+        for i,chunk in enumerate(state):
+            if chunk.status == "free" and chunk.type != "fast_chunk":
+                to_coalesc.append(i)
+            elif ( chunk.status == "allocated" or chunk.type == "fast_chunk" ) and len(to_coalesc) > 1: # in this case we have stuff to coalesc
+                first_index = to_coalesc[0]
+                first_chunk = state[first_index]
+                new_size = first_chunk.size
+                new_raw_size = first_chunk.raw_size
+                to_coalesc.pop(0)
+                for c in to_coalesc:
+                    new_size = new_size + state[c].size
+                    new_raw_size = new_raw_size + state[c].raw_size
+                state[first_index] =  Chunk(first_chunk.addr,new_size,new_raw_size,random_color(),"free")
+                for x in sorted(to_coalesc,reverse=True):
+                    del state[x]
+                to_coalesc = []
+
+        # any chunk to coalesc remain?
+        if len(to_coalesc) > 1:
+            first_index = to_coalesc[0]
+            first_chunk = state[first_index]
+            new_size = first_chunk.size
+            new_raw_size = first_chunk.raw_size
+            to_coalesc.pop(0)
+            for c in to_coalesc:
+                new_size = new_size + state[c].size
+                new_raw_size = new_raw_size + state[c].raw_size
+            state[first_index] =  Chunk(first_chunk.addr,new_size,new_raw_size,random_color(),"free")
+
+            for x in sorted(to_coalesc,reverse=True):
+                del state[x]
+
+    if len(state) == 1 and state[0].status == "free":
+        del state[0]
 
 
 def buildTimeline():
@@ -272,7 +333,7 @@ def buildTimeline():
         state.errors = []
         op(state,api_args,api_info,api_ret,api_counter)
         sort(state)
-        docoalesc(state)
+        coalesc(state)
         timeline.append(copy.deepcopy(state))
 
 '''

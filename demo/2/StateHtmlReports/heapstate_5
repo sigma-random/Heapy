@@ -75,7 +75,7 @@
      <center>
      </center>
      <center>
-      malloc(8) = 0x5575b4b560d0
+      malloc(4) = 0x81cb0a0
      </center>
     </div>
     <hr>
@@ -85,22 +85,22 @@
   <div class="row">
    <div class="col-md-2">
     <div class="state" id="heap_state">
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(170, 173, 63);;">
-      0x5575b4b56010-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(101, 69, 87);;">
+      0x81cb008-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(60, 97, 153);;">
-      0x5575b4b56050-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(128, 78, 100);;">
+      0x81cb018-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(123, 78, 124);;">
-      0x5575b4b56070-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(161, 75, 181);;">
+      0x81cb028-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(127, 74, 130);;">
-      0x5575b4b56090-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(119, 92, 169);;">
+      0x81cb038-small chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(154, 147, 92);;">
-      0x5575b4b560d0-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(82, 150, 140);;">
+      0x81cb0a0-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(110, 118, 225);;">
+     <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(0, 255, 0);;">
       TOP CHUNK
      </div>
     </div>

@@ -165,7 +165,7 @@ int main(int argc, char **argv)
 	fclose(dump_file);
 
 	// now let's dump the libc
-	
+
 	ret = lseek64(memfd,libc_start_value,SEEK_SET);
 	dump_file = fopen(libc_dump_filename, "a");
 	row_count = 7;

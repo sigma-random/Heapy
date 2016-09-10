@@ -199,7 +199,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
     else:
         index,res = state.getChunkAt(address_to_realloc) # let's search the chunk that has been reallocated
         if api_ret == address_to_realloc:
-            state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
+            state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
             state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
             state.dump_name = dump_name + api_counter
             state.libc_dump_name = libc_dump_name + api_counter
@@ -235,26 +235,98 @@ def check_malloc_consolidate(libc_dump_name):
                 return False
         line_cont += 1
 
+
+
 # coalesc together all the chunks that are not fastchunks
-def coalesc(state):
+def coalesc(state,consolidate):
+    tocoalesc = []
     for i,chunk in enumerate(state):
+        if chunk.status == "allocated" or ( chunk.type == "fast_chunk" and consolidate == False ): # stop collecting address to coalesc in this cases
+            if len(tocoalesc) == 0: # in this case we have a series of allocated chunk
+                tocoalesc = []
+                continue
+            if len(tocoalesc) == 1: # in this case we have an isolated free chunk that we can't coalesc...
+                tocoalesc = []
+                continue
+            if len(tocoalesc) > 1: # we have some chunks to coalesc!
+                # now let's pop the chunk that will coalesc the others
+                first_index = tocoalesc[0] # let's extract the index of the first chunk
+                first_chunk = state[tocoalesc[0]] # and the chunk too
+                new_size = int(first_chunk.size,10)
+                new_raw_size = int(first_chunk.raw_size,10)
+                tocoalesc.pop(0)
+
+                for c_index in tocoalesc:
+                    chunk_to_merge = state[c_index]
+                    new_size += int(chunk_to_merge.size,10)
+                    new_raw_size += int(chunk_to_merge.raw_size,10)
+
+                # finish to coalesc, let's remove the coalesced chunks and
+                # substitute the first_chunk with the coalesced one
+
+                for index in sorted(tocoalesc, reverse=True):
+                    del state[index]
+
+                state[first_index] = Chunk(first_chunk.addr,str(new_size),str(new_raw_size),random_color(),"free")
+                tocoalesc = [] # clean the tocoalesc
+
+        if chunk.status == "free": # we are considering only free chunks that are not fast_chunks
+            tocoalesc.append(i) # save the index of the free chunk
+
+        if chunk.status == "top": # we hitted the top chunk
+            if len(tocoalesc) == 0: # nothing to do here
+                continue
+            if len(tocoalesc) >= 1: # we hitted the top with some free chunks
+                for index in sorted(tocoalesc, reverse=True):
+                    del state[index]
 
 
+def coalescAndConsolidate(state):
+    tocoalesc = []
+    for i,chunk in enumerate(state):
+        if chunk.status == "allocated": # stop collecting address to coalesc in this cases
+            if len(tocoalesc) == 0: # in this case we have a series of allocated chunk
+                continue
+            if len(tocoalesc) == 1: # in this case we have an isolated free chunk that we can't coalesc...
+                continue
+            if len(tocoalesc) > 1: # we have some chunks to coalesc!
+                # now let's pop the chunk that will coalesc the others
+                first_index = tocoalesc[0] # let's extract the index of the first chunk
+                first_chunk = state[tocoalesc[0]] # and the chunk too
+                new_size = first_chunk.size
+                new_raw_size = first_chunk.raw_size
+                tocoalesc.pop(0)
 
+                for c_index in tocoalesc:
+                    chunk_to_merge = state[c_index]
+                    new_size += chunk_to_merge.size
+                    new_raw_size += chunk_to_merge.new_raw_size
 
+                # finish to coalesc, let's remove the coalesced chunks and
+                # substitute the first_chunk with the coalesced one
+
+                for index in sorted(tocoalesc, reverse=True):
+                    del state[index]
+
+                state[first_index] = Chunk(first_chunk.addr,first_chunk.size,first_chunk.raw_size,random_color(),"free")
+                tocoalesc = [] # clean the tocoalesc
+
+        if chunk.status == "free": # we are considering only free chunks that are not fast_chunks ( fast chunks will be catched in the previous if )
+            tocoalesc.append(i) # save the index of the free chunk
+
+        if chunk.status == "top": # we hitted the top chunk
+            if len(tocoalesc) == 0: # nothing to do here
+                continue
+            if len(tocoalesc) >= 1: # we hitted the top with some free chunks
+                for index in sorted(tocoalesc, reverse=True):
+                    del state[index]
 
 def docoalesc(state):
     consolidate = False # this flag indicates if fastchunks must be coalesced or not ( this will be true only if malloc_consolidate has been called )
     if state.fastchunks_bit == 0: # if it is 0 let's check from the libc dump if it is now 1 again ( this would mean that a malloc_consolidate has been called )
         if check_malloc_consolidate(state.libc_dump_name) == True:
             consolidate = True
-    if consolidate == True:
-        coalescAndConsolidate(state)
-    else
-        coalesc(state)
-
-    to_coalesc = [] # list of address to coalesc
-
+    coalesc(state,consolidate)
 
 def buildTimeline():
     for djson in api_call_json:
@@ -272,7 +344,10 @@ def buildTimeline():
         state.errors = []
         op(state,api_args,api_info,api_ret,api_counter)
         sort(state)
+        topchunk = Chunk("0","0","0","0","top")
+        state.append(topchunk)
         docoalesc(state)
+        state.pop()
         timeline.append(copy.deepcopy(state))
 
 '''

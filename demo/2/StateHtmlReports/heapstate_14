@@ -75,7 +75,7 @@
      <center>
      </center>
      <center>
-      malloc(8) = 0x5575b4b560f0
+      free(0x81cb0c0)
      </center>
     </div>
     <hr>
@@ -85,34 +85,31 @@
   <div class="row">
    <div class="col-md-2">
     <div class="state" id="heap_state">
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(170, 173, 63);;">
-      0x5575b4b56010-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(60, 97, 153);;">
-      0x5575b4b56050-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(123, 78, 124);;">
-      0x5575b4b56070-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(127, 74, 130);;">
-      0x5575b4b56090-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(154, 147, 92);;">
-      0x5575b4b560d0-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(128, 73, 151);;">
-      0x5575b4b560f0-fast_chunk
-     </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(131, 174, 117);;">
-      0x5575b4b56110-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      0x81cb008-FREE-fast_chunk
      </div>
      <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
-      0x5575b4b56150-FREE-fast_chunk
+      0x81cb018-FREE-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(129, 132, 154);;">
-      0x5575b4b56170-fast_chunk
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      0x81cb028-FREE-fast_chunk
      </div>
-     <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(110, 118, 225);;">
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(119, 92, 169);;">
+      0x81cb038-small chunk
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      0x81cb0a0-FREE-fast_chunk
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      0x81cb0b0-FREE-fast_chunk
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      0x81cb0c0-FREE-fast_chunk
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(172, 61, 175);;">
+      0x81cb0d0-fast_chunk
+     </div>
+     <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(0, 255, 0);;">
       TOP CHUNK
      </div>
     </div>

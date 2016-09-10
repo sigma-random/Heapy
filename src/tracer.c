@@ -41,39 +41,27 @@ char * dumper_binary = {"./readmem"};
 
 // original address of functions
 size_t real_func;
-void* (*real_malloc)(size_t) = NULL;
-void  (*real_free)(void*) = NULL;
-void* (*real_calloc)(size_t,size_t) = NULL;
-void* (*real_realloc)(void*,size_t) = NULL;
+void *(*real_malloc)(size_t);
+void  (*real_free)(void *);
+void *(*real_calloc)(size_t, size_t);
+void *(*real_realloc)(void *, size_t);
 
 uint16_t pid;
 uint16_t pid2;
+
+size_t usable_size;
+void *ret_addr = NULL;
 
 /*
  Executed during the loading of this library
 */
 __attribute__((constructor)) void tracer(){
-  real_malloc = get_original("malloc");
-  real_free = get_original("free");
-  real_calloc = get_original("calloc");
-  real_realloc = get_original("realloc");
 
+  real_malloc = dlsym(RTLD_NEXT, "malloc");
+	real_free = dlsym(RTLD_NEXT, "free");
+	real_calloc = dlsym(RTLD_NEXT, "calloc");
+	real_realloc = dlsym(RTLD_NEXT, "realloc");
 }
-
-/*
- Get the address of the original function inside the glibc
- exploiting the dlsym function.
-*/
-static ssize_t get_original(char *func_name)
-{
-    real_func = dlsym(RTLD_NEXT, func_name); //dlsym is without heap allocations
-    if (NULL == real_func) {
-        fprintf(stderr, "Error in `dlsym`: %s\n", dlerror());
-    }else{
-      return real_func;
-    }
-}
-
 
 // During the first allocation we have to retreive the
 // addresses of the heap just allocated
@@ -84,7 +72,7 @@ static void handleFirstAllocation(){
 
   if(pid2 == 0){  // ok son, do the dirty job!
     hook_off = 1;
-    int err = execve(tracer_child_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
+    execve(tracer_child_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
     exit(0);
   }else{
     wait();
@@ -98,7 +86,6 @@ static void dump_heap(){
 if(pid == 0){
   hook_off = 1;
   execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
-  exit(0);
 }else{
   wait();
 }
@@ -116,9 +103,8 @@ void *malloc(size_t size)
 
     api_counter++;
 
-    void *ret_addr = NULL;
     ret_addr = real_malloc(size);
-    size_t usable_size = malloc_usable_size(ret_addr);
+    usable_size = malloc_usable_size(ret_addr);
 
     if(first_allocation == 0){
       handleFirstAllocation(); // We need to execute the first malloc in order to retreive the heap range
@@ -138,19 +124,15 @@ void *malloc(size_t size)
 */
 void free(void* addr)
 {
-  
     if(hook_off == 1){
       return real_free(addr);
     }
 
     api_counter++;
-
     real_free(addr);
-
     fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"free\",\"api_counter\": \"%zd\", \"api_args\": { \"address\": \"0x%zx\"}}\n</%s>\n\n",hippy_tag,api_counter,addr,hippy_tag);
 
     dump_heap();
-
     return;
 }
 
@@ -165,9 +147,8 @@ void *calloc(size_t nmemb, size_t size)
 
     api_counter++;
 
-    void *ret_addr = NULL;
     ret_addr = real_calloc(nmemb,size);
-    size_t usable_size = malloc_usable_size(ret_addr);
+    usable_size = malloc_usable_size(ret_addr);
 
     if(first_allocation == 0){
       handleFirstAllocation();
@@ -186,16 +167,15 @@ void *calloc(size_t nmemb, size_t size)
 */
 void *realloc(void* addr, size_t size)
 {
-
+   /*
     if(hook_off == 1){
       return real_realloc(addr,size);
     }
 
     api_counter++;
 
-    void *ret_addr = NULL;
     ret_addr = real_realloc(addr,size);
-    size_t usable_size = malloc_usable_size(ret_addr);
+    usable_size = malloc_usable_size(ret_addr);
 
     if(first_allocation == 0){
       handleFirstAllocation();
@@ -204,6 +184,7 @@ void *realloc(void* addr, size_t size)
 
     // in this case the chunk has been moved in another position in memory
     // and the documentation says that the old chunk is freed, so we must register a free
+
     if(ret_addr !=  addr){
       fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"realloc\",\"api_counter\":\"%zd\",\"api_args\":{\"address\": \"0x%zx\", \"size\": \"%zd\"},\"api_info\":{ \"usable_chunk_size\": \"%zd\", \"internal_api_call\":{\"type\": \"apicall\", \"api_name\": \"free\", \"api_args\": {\"address\": \"0x%zx\"}}},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
                 hippy_tag,api_counter,addr,size,usable_size,addr,ret_addr,hippy_tag);
@@ -213,5 +194,6 @@ void *realloc(void* addr, size_t size)
     }
 
     dump_heap();
+    */
     return;
 }

@@ -65,7 +65,7 @@ class HippyGuiManager:
                 block_tag['style'] = block_layout
                 block_tag.string = chunk.addr + "-" + chunk.type
                 div_heap_state.append(block_tag)
-            else:
+            if chunk.status == "free":
                 div_heap_state = self.soup.find(id="heap_state")
                 block_tag = self.soup.new_tag("div")
                 block_tag['class'] = "block normal"
@@ -74,11 +74,10 @@ class HippyGuiManager:
                 block_tag.string = chunk.addr + "-FREE" + "-" + chunk.type
                 div_heap_state.append(block_tag)
 
-        # finally the top chunk
         div_heap_state = self.soup.find(id="heap_state")
         block_tag = self.soup.new_tag("div")
         block_tag['class'] = "block normal"
-        block_layout = "width: 100%; height: 100%; background-color: rgb(110, 118, 225);;"
+        block_layout = "width: 100%; height: 100%; background-color: rgb(0, 255, 0);;"
         block_tag['style'] = block_layout
         block_tag.string = "TOP CHUNK"
         div_heap_state.append(block_tag)

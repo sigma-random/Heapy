@@ -167,7 +167,6 @@ void *calloc(size_t nmemb, size_t size)
 */
 void *realloc(void* addr, size_t size)
 {
-   /*
     if(hook_off == 1){
       return real_realloc(addr,size);
     }
@@ -194,6 +193,6 @@ void *realloc(void* addr, size_t size)
     }
 
     dump_heap();
-    */
+
     return;
 }

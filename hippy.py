@@ -20,21 +20,22 @@ proc_info_json = None
 
 
 class ProcInfo():
- def __init__(self,hstart,hend,libcstart,libcend,binaryarch):
+ def __init__(self,hstart,hend,libcversion,libcstart,libcend,binaryarch):
   self.architecture         = binaryarch  # binary is 32 or 64 bit?
   self.heap_start_address   = hstart
   self.heap_end_address     = hend
+  self.libc_version         = libcversion
   self.libc_start_address   = libcstart
   self.libc_end_address     = libcend
   return
 
  def getArchMutiplier(self):
-     if "x86_64" in self.architecture:
+     if self.architecture == "64":
          return 2
      else:
          return 1
  def __str__(self):
-     repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
+     repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\n[+]libc_version: " + self.libc_version + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
      return repr
 '''
  This is a list of chunks currently allocated in a State
@@ -49,6 +50,7 @@ class State(list):
   self.dump_name = "" # this in order to correlate a State with a taken dump
   self.libc_dump_name = ""
   self.color = []
+  self.last_heap_address = "0" # the highest address reached by the heap
   return
 
  def getChunkAt(self,address):
@@ -124,6 +126,10 @@ def parseProgramOut(output):
          print_next_line = 1
 
 def malloc(state,api_args,api_info,api_ret,api_counter):
+
+    if int(api_ret,16) > int(state.last_heap_address,16):
+        state.last_heap_address = hex(int(api_ret,16) + int(api_info['usable_chunk_size'],10) + 0x200) # save the address of the allocated chunk if it is higher than the last saved one
+
     index,res = state.getChunkAt(str(api_ret)) # if something returns from this function we are allocating in a previous freed chunk
 
     if index != -1: # if true, we are reusing a previously freed chunk!
@@ -216,19 +222,26 @@ def sort(state):
     state = state.sort(key=lambda chunk: chunk.raw_addr)
 
 
-# for example in the libc 2.19 the information about flags are at the line 34 of the dump_index
+# for example in the libc 2.19 the information about flags are at the line 34 of the libc_dump file.
 # in another libc version it could be in another position.
-supported_libc = {"2.19" : 34}
+supported_libc = {"2.19-32" : 34 , "2.23-32": 61 ,  "2.23-64": 90 }
 
 # This function check the bit FASTCHUNKS_BIT in order to discover if it has been resetted to 1
 # and so if malloc_consolidate has been called
 def check_malloc_consolidate(libc_dump_name):
     f = open(libc_dump_path + libc_dump_name)
-    fastbin_bit_line = supported_libc.get("2.19")
+    libc_version = procInfo.libc_version
+    arch = procInfo.architecture
+    fastbin_bit_line = supported_libc.get(libc_version+"-"+arch,0)
+
+    if fastbin_bit_line == 0:
+        print "[ERROR] Libc not supported"
+        sys.exit(0)
+
     line_cont = 1
     for line in f.readlines():
         if line_cont == fastbin_bit_line:
-            flags_dword = line.split(" ")[2]
+            flags_dword = line.split(" ")[2] # the second dword contains the flag we need
             if flags_dword[7] == '1':
                 return True
             else:
@@ -281,46 +294,6 @@ def coalesc(state,consolidate):
                     del state[index]
 
 
-def coalescAndConsolidate(state):
-    tocoalesc = []
-    for i,chunk in enumerate(state):
-        if chunk.status == "allocated": # stop collecting address to coalesc in this cases
-            if len(tocoalesc) == 0: # in this case we have a series of allocated chunk
-                continue
-            if len(tocoalesc) == 1: # in this case we have an isolated free chunk that we can't coalesc...
-                continue
-            if len(tocoalesc) > 1: # we have some chunks to coalesc!
-                # now let's pop the chunk that will coalesc the others
-                first_index = tocoalesc[0] # let's extract the index of the first chunk
-                first_chunk = state[tocoalesc[0]] # and the chunk too
-                new_size = first_chunk.size
-                new_raw_size = first_chunk.raw_size
-                tocoalesc.pop(0)
-
-                for c_index in tocoalesc:
-                    chunk_to_merge = state[c_index]
-                    new_size += chunk_to_merge.size
-                    new_raw_size += chunk_to_merge.new_raw_size
-
-                # finish to coalesc, let's remove the coalesced chunks and
-                # substitute the first_chunk with the coalesced one
-
-                for index in sorted(tocoalesc, reverse=True):
-                    del state[index]
-
-                state[first_index] = Chunk(first_chunk.addr,first_chunk.size,first_chunk.raw_size,random_color(),"free")
-                tocoalesc = [] # clean the tocoalesc
-
-        if chunk.status == "free": # we are considering only free chunks that are not fast_chunks ( fast chunks will be catched in the previous if )
-            tocoalesc.append(i) # save the index of the free chunk
-
-        if chunk.status == "top": # we hitted the top chunk
-            if len(tocoalesc) == 0: # nothing to do here
-                continue
-            if len(tocoalesc) >= 1: # we hitted the top with some free chunks
-                for index in sorted(tocoalesc, reverse=True):
-                    del state[index]
-
 def docoalesc(state):
     consolidate = False # this flag indicates if fastchunks must be coalesced or not ( this will be true only if malloc_consolidate has been called )
     if state.fastchunks_bit == 0: # if it is 0 let's check from the libc dump if it is now 1 again ( this would mean that a malloc_consolidate has been called )
@@ -359,14 +332,15 @@ def buildProcInfo():
     if  heap_range != []:
         heap_start_address  = heap_range['heap_start_address']
         heap_end_address    = heap_range['heap_end_address']
+    libc_version = proc_info_json.get('libc_version',[])
     libc_range = proc_info_json.get('libc_range',[])
     if libc_range != []:
         libc_start_address = libc_range['libc_start_address']
         libc_end_address   = libc_range['libc_end_address']
     arch = proc_info_json['arch']
-    return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
+    return ProcInfo(heap_start_address,heap_end_address,libc_version,libc_start_address,libc_end_address,arch)
 
-def random_color(r=100, g=100, b=125):
+def random_color(r=150, g=150, b=150):
     red = (random.randrange(0, 256) + r) / 2
     green = (random.randrange(0, 256) + g) / 2
     blue = (random.randrange(0, 256) + b) / 2
@@ -444,9 +418,16 @@ def doHexDumpTag(chunk,dump_name):
                 print "Something strange happen, skipping this chunk"
 
 def buildHtml(timeline):
+    print "[+]Generating your awesome report"
     hippy_gui_manager = HippyGuiManager()
-    for state in timeline:
-        hippy_gui_manager.run(state)
+    prev_state = []
+    for index,state in enumerate(timeline):
+        try:
+            next_state = timeline[index+1] # try to retrieve the next state ( will be useful to print the next api call)
+        except:
+            next_state = []
+        hippy_gui_manager.run(prev_state,state,next_state,procInfo)
+        prev_state = state
 
 operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': realloc}
 procInfo = None

@@ -18,6 +18,7 @@ int main(int argc , char* argv[]){
   char heap_end_address[30] = {0};
   char libc_start_address[30] = {0}; // information about the bins ( malloc_state struct ) are in the .bss
   char libc_end_address[30] = {0};
+  char libc_version[30] = {0};
   int cont = 0;
   char * line = NULL;
   char * libc_line = NULL;
@@ -61,8 +62,8 @@ int main(int argc , char* argv[]){
     cont = 0;
     // searching for the .bss of the libc mapped in memory:
     // 7f6138cee000-7f6138cf0000 rw-p 001c3000 fc:01 13373861 /lib/x86_64-linux-gnu/libc-2.23.so
-    if (libc_line = strstr(line, "libc-") != NULL && strstr(line, "rw-p") != NULL ) { // found the line in the /proc/<pid>/maps with the  bss libc information
-      
+    if (strstr(line, "libc-") != NULL && strstr(line, "rw-p") != NULL ) { // found the line in the /proc/<pid>/maps with the  bss libc information
+
        libc_found = 1;
        char *c = line; // with this we extract the address range
 
@@ -80,6 +81,21 @@ int main(int argc , char* argv[]){
          c++;
          cont++;
        }
+
+       // now let's extract the libc version in use by the program with a dirty trick
+       libc_line = strstr(line, "libc-");
+       char *c1 = libc_line+5; // skip the "libc-"
+       cont = 0;
+
+       while(*c1 != 's'){
+         libc_version[cont] = *c1;
+         c1++;
+         cont++;
+       }
+
+       libc_version[cont] = 0;
+       libc_version[cont-1] = 0;
+
     }
 
     if(heap_found == 1 && libc_found == 1){
@@ -100,9 +116,10 @@ int main(int argc , char* argv[]){
   fprintf(f,"0x%s\n",libc_end_address);
   fclose(f);
 
-  fprintf(stderr,"\n\n<%s>\n{\"type\": \"procinfo\",\"heap_range\": {\"heap_start_address\": \"0x%s\",\"heap_end_address\": \"0x%s\"}, \"libc_range\": \\
+
+  fprintf(stderr,"\n\n<%s>\n{\"type\": \"procinfo\",\"heap_range\": {\"heap_start_address\": \"0x%s\",\"heap_end_address\": \"0x%s\"}, \"libc_version\": \"%s\" , \"libc_range\": \\
                  {\"libc_start_address\": \"0x%s\",\"libc_end_address\": \"0x%s\"}, \"arch\": \"%zd\"}\n</%s>\n\n",
-                 hippy_tag,heap_start_address,heap_end_address,libc_start_address,libc_end_address,size_arch,hippy_tag);
+                 hippy_tag,heap_start_address,heap_end_address,libc_version,libc_start_address,libc_end_address,size_arch,hippy_tag);
 
   /*
   char *ptr;

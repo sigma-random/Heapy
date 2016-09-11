@@ -20,10 +20,11 @@ proc_info_json = None
 
 
 class ProcInfo():
- def __init__(self,hstart,hend,libcstart,libcend,binaryarch):
+ def __init__(self,hstart,hend,libcversion,libcstart,libcend,binaryarch):
   self.architecture         = binaryarch  # binary is 32 or 64 bit?
   self.heap_start_address   = hstart
   self.heap_end_address     = hend
+  self.libc_version         = libcversion
   self.libc_start_address   = libcstart
   self.libc_end_address     = libcend
   return
@@ -34,7 +35,7 @@ class ProcInfo():
      else:
          return 1
  def __str__(self):
-     repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
+     repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\nlibc_version: " + self.libc_version + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
      return repr
 '''
  This is a list of chunks currently allocated in a State
@@ -199,7 +200,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
     else:
         index,res = state.getChunkAt(address_to_realloc) # let's search the chunk that has been reallocated
         if api_ret == address_to_realloc:
-            state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'])
+            state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
             state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
             state.dump_name = dump_name + api_counter
             state.libc_dump_name = libc_dump_name + api_counter
@@ -216,9 +217,9 @@ def sort(state):
     state = state.sort(key=lambda chunk: chunk.raw_addr)
 
 
-# for example in the libc 2.19 the information about flags are at the line 34 of the dump_index
+# for example in the libc 2.19 the information about flags are at the line 34 of the libc_dump file.
 # in another libc version it could be in another position.
-supported_libc = {"2.19" : 34}
+supported_libc = {"2.19" : 34 , "2.23": 61}
 
 # This function check the bit FASTCHUNKS_BIT in order to discover if it has been resetted to 1
 # and so if malloc_consolidate has been called
@@ -359,12 +360,13 @@ def buildProcInfo():
     if  heap_range != []:
         heap_start_address  = heap_range['heap_start_address']
         heap_end_address    = heap_range['heap_end_address']
+    libc_version = proc_info_json.get('libc_version',[])
     libc_range = proc_info_json.get('libc_range',[])
     if libc_range != []:
         libc_start_address = libc_range['libc_start_address']
         libc_end_address   = libc_range['libc_end_address']
     arch = proc_info_json['arch']
-    return ProcInfo(heap_start_address,heap_end_address,libc_start_address,libc_end_address,arch)
+    return ProcInfo(heap_start_address,heap_end_address,libc_version,libc_start_address,libc_end_address,arch)
 
 def random_color(r=100, g=100, b=125):
     red = (random.randrange(0, 256) + r) / 2

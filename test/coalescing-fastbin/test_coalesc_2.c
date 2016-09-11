@@ -45,7 +45,12 @@ code.
 int main(){
 
 unsigned int a = malloc(1000);
+
+unsigned int a991 = malloc(1000);
 unsigned int b = malloc(4);
+unsigned int a999 = malloc(1000);
+
+unsigned int aa = malloc(5);
 unsigned int c = malloc(1000);
 unsigned int d = malloc(4);
 unsigned int e = malloc(1000);

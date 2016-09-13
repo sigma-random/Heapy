@@ -59,6 +59,12 @@ class State(list):
             return i,chunk
      return -1,None # well, chunk not found in the state
 
+ def getChunkAtRawAddress(self,raw_address):
+     for i,chunk in enumerate(self):
+         if chunk.raw_addr == raw_address:
+            return i,chunk
+     return -1,None # well, again, chunk not found
+
  def __str__(self):
      repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n[+]libc_dump_name: " + self.libc_dump_name + "\n"
      for chunk in self:
@@ -175,6 +181,7 @@ def free(state,api_args,api_info,api_ret,api_counter):
             del state[index]
         else:
             state[index].status = "free" # change the status of the chunk
+            state[index].color = ('0','0','0')
             if state[index].type == "fast_chunk": # if we are freeing a fast_chunk
                 state.fastchunks_bit = 0 # following ptmalloc whenever a fastbin is released the fastchunks_bit is cleared, now if it will be resetted to 1 it means that a call to malloc_consolidate has been done.
 
@@ -280,7 +287,7 @@ def coalesc(state,consolidate):
                 for index in sorted(tocoalesc, reverse=True):
                     del state[index]
 
-                state[first_index] = Chunk(first_chunk.addr,str(new_size),str(new_raw_size),random_color(),"free")
+                state[first_index] = Chunk(first_chunk.addr,str(new_size),str(new_raw_size),('0','0','0'),"free")
                 tocoalesc = [] # clean the tocoalesc
 
         if chunk.status == "free": # we are considering only free chunks that are not fast_chunks
@@ -318,9 +325,9 @@ def buildTimeline():
         op(state,api_args,api_info,api_ret,api_counter)
         sort(state)
         topchunk = Chunk("0","0","0","0","top")
-        state.append(topchunk)
+        state.append(topchunk) # dirty hack to detect the top chunk during coalescing
         docoalesc(state)
-        state.pop()
+        state.pop() # remove the top chunk, we don't need to insert it in the timeline :-)
         timeline.append(copy.deepcopy(state))
 
 '''
@@ -439,7 +446,7 @@ def Usage():
 
 if __name__ == '__main__':
 
- cmd = "LD_PRELOAD=./tracer.so ./testcoalesc"
+ cmd = "LD_PRELOAD=./tracer.so ./datastore < ./inputs_test2"
 
  p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
  output = p.stderr.read()

@@ -6,4 +6,9 @@
 
 6) gestire corruption e allocazione di chunk overlapped
 7) range libc i386 e x64 diversi!
-8) displayare solo fino al massimo indirizzo raggiunto dall'heap per evitare pesantezza inutile
+8) sistemare info all'interno dei chunk
+9) visualizzare chunk sull'hex dump con possibilità di cliccare sul chunk nell'immagine e spostare il focus all'hex
+10) fixare scrolling del div degli hexdump in modo tale che ti segua e non vada sotto il grafico ( bug stupido grafico )
+11) organizzare meglio le info nell'hexdump della libc
+12) quando clicco sull'hexdump mi visualizzare il chunk sul grafico
+13) quando clicco sull'indirizzo della current call visualizzo chunk sul grafico

@@ -2,28 +2,28 @@
 
 #define BLOCK_SIGNALS 1
 
-char heap_dump_filename[40];
-char libc_dump_filename[40];
-char dump_index_string[10];
+char heap_dump_filename[40]  = {0};
+char libc_dump_filename[40]  = {0};
+char dump_index_string[10]  = {0};
+char start_heap[30] = {0};
+char end_heap[30] = {0};
+char start_libc[30] = {0};
+char end_libc[30] = {0};
+char s_pid[16] = {0};
+int dump_index;
+struct stat st = {0};
+
+// read bytes from the tracee's memory
+char *p_addr;
+unsigned char a_byte_0;
+unsigned char a_byte_1;
+unsigned char a_byte_2;
+unsigned char a_byte_3;
 
 int main(int argc, char **argv)
 {
-	char start_heap[30];
-	char end_heap[30];
-	char start_libc[30];
-	char end_libc[30];
-	char s_pid[16];
-
-	int dump_index;
-	struct stat st = {0};
-
-	memset(heap_dump_filename,0,40);
-	memset(libc_dump_filename,0,40);
-	memset(dump_index_string,0,10);
-
 	strncpy(heap_dump_filename,"./HeapDumps/heap_dump_",22);
 	strncpy(libc_dump_filename,"./LibcDumps/libc_dump_",22);
-
 
 	if (stat("./HeapDumps", &st) == -1) {
     mkdir("./HeapDumps", 0700);
@@ -129,13 +129,6 @@ int main(int argc, char **argv)
 	int memfd = open(mempath, O_RDONLY);
 	assert(memfd != -1);
 
-	// read bytes from the tracee's memory
-	char *p_addr;
-	unsigned char a_byte_0;
-	unsigned char a_byte_1;
-	unsigned char a_byte_2;
-	unsigned char a_byte_3;
-
 	size_t ret = lseek64(memfd,heap_start_value,SEEK_SET);
 	FILE * dump_file = fopen(heap_dump_filename, "a");
 	int row_count = 7; // 7 are 8 dwords per line
@@ -163,6 +156,7 @@ int main(int argc, char **argv)
 	}
 
 	fclose(dump_file);
+
 
 	// now let's dump the libc
 
@@ -194,7 +188,7 @@ int main(int argc, char **argv)
 
 	fclose(dump_file);
 	free(mempath);
-
+	
   ptrace(PTRACE_DETACH, pid, NULL, NULL);
 	return 0;
 }

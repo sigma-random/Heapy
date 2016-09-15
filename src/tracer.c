@@ -33,7 +33,7 @@ int hook_off = 0;
 char *hippy_tag = {"hippy-d75d6fc7"};
 int api_counter = 0; //this will be used later for the corrispondence between dumps and logs
 char *envp[] = {0};
-char *argv[] = {0};
+char *argv[] = {"hippy_cmd",NULL};
 
 char * tracer_child_binary = {"./tracer_child"};
 char * dumper_binary = {"./readmem"};
@@ -75,20 +75,8 @@ static void handleFirstAllocation(){
     execve(tracer_child_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
     exit(0);
   }else{
-    wait();
+    wait(); // wait is heap allocation free
   }
-}
-
-static void dump_heap(){
-
- pid = fork(); // fork is heap-allocation-free
-
-if(pid == 0){
-  hook_off = 1;
-  execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
-}else{
-  wait();
-}
 }
 
 /*
@@ -114,7 +102,14 @@ void *malloc(size_t size)
     fprintf(stderr, "\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"malloc\",\"api_counter\": \"%zd\",\"api_args\": { \"size\": \"%zd\" },\"api_info\":{\"usable_chunk_size\": \"%zd\"},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
             hippy_tag,api_counter,size,usable_size,ret_addr,hippy_tag);
 
-    dump_heap();
+    pid = fork(); // fork is heap-allocation-free
+
+   if(pid == 0){
+     hook_off = 1;
+     execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
+   }else{
+     wait();
+   }
 
     return ret_addr;
 }
@@ -129,10 +124,21 @@ void free(void* addr)
     }
 
     api_counter++;
-    real_free(addr);
-    fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"free\",\"api_counter\": \"%zd\", \"api_args\": { \"address\": \"0x%zx\"}}\n</%s>\n\n",hippy_tag,api_counter,addr,hippy_tag);
 
-    dump_heap();
+    real_free(addr);
+
+    fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"free\",\"api_counter\": \"%zd\", \"api_args\": { \"address\": \"0x%zx\"}}\n</%s>\n\n",
+                    hippy_tag,api_counter,addr,hippy_tag);
+
+    pid = fork(); // fork is heap-allocation-free
+
+   if(pid == 0){
+     hook_off = 1;
+     execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
+   }else{
+     wait();
+   }
+
     return;
 }
 
@@ -158,7 +164,15 @@ void *calloc(size_t nmemb, size_t size)
     fprintf(stderr,"\n\n<%s>\n{\"type\":\"apicall\",\"api_name\": \"calloc\",\"api_counter\":\"%zd\",  \"api_args\":{ \"nmemb\": \"%zd\", \"membsize\": \"%zd\"},\"api_info\":{\"usable_chunk_size\": \"%zd\"},\"api_return\": \"0x%zx\"}\n</%s>\n\n",
              hippy_tag,api_counter,nmemb,size,usable_size,ret_addr,hippy_tag);
 
-    dump_heap();
+   pid = fork(); // fork is heap-allocation-free
+
+  if(pid == 0){
+    hook_off = 1;
+    execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
+  }else{
+    wait();
+  }
+
     return;
 }
 
@@ -192,7 +206,14 @@ void *realloc(void* addr, size_t size)
                 hippy_tag,api_counter,addr,size,usable_size,ret_addr,hippy_tag);
     }
 
-    dump_heap();
+    pid = fork(); // fork is heap-allocation-free
+
+   if(pid == 0){
+     hook_off = 1;
+     execve(dumper_binary, argv, envp); // by using execve we have removed the LD_PRELOAD stuff inside the child
+   }else{
+     wait();
+   }
 
     return;
 }

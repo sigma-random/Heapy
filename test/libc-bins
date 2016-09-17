@@ -15,7 +15,7 @@ malloc_state = libc.bss + 0xb20
 		fastbin-2	fastbin-3	fastbin-4	fastbin-5
 0xf7fac790:     0x00000000      0x00000000      0x00000000      0x00000000
 
-		fastbin-6	fastbin-7	fastbin-8	fastnin-9
+		fastbin-6	fastbin-7	fastbin-8	fastbin-9
 0xf7fac7a0:     0x00000000      0x00000000      0x00000000      0x00000000
 
 		top-chunk	last-remain	unsortedbin	unsortedbin

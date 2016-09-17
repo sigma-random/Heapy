@@ -1,0 +1,610 @@
+<html>
+ <head>
+  <!-- Latest compiled and minified CSS -->
+  <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" rel="stylesheet">
+   <!-- Optional theme -->
+   <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" rel="stylesheet">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+    </script>
+    <script crossorigin="anonymous" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript">
+     $(window).load(function(){
+  (function($) {
+      var element = $('.follow-scroll'),
+      originalY = element.offset().top;
+      maxBottom = element.offset().top + $('#heap_state').outerHeight()
+      var topMargin = 0;
+      element.css('position', 'relative');
+
+      $(window).on('scroll', function(event) {
+
+          var scrollTop = $(window).scrollTop();
+          element.stop(false, false).animate({
+              top: scrollTop < originalY
+                      ? 0
+                      : scrollTop - originalY + topMargin
+          }, 100);
+
+      });
+  })(jQuery);
+  });
+    </script>
+   </link>
+  </link>
+ </head>
+</html>
+<style>
+ .state {
+  margin: 0.5em;
+  background-color: white;
+  display:block;
+  overflow:auto;
+  box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.80);
+  padding: 0.2em;
+  }
+
+  .info {
+  margin: 0.5em; padding: 0;
+  background-color: white;
+  border-radius: 0.3em;
+  display:block;
+  overflow:auto;
+  padding: 0.5em;
+  }
+
+  .dumps{
+  }
+
+  .hexdump {
+  margin: 0.5em; padding: 0;
+  background-color: white;
+  display:block;
+  overflow:auto;
+  height: 100%;
+  width: 100%;
+  padding: 0.5em;
+  }
+</style>
+<body>
+ <div class="container-fluid">
+  <div class="row">
+   <div class="col-md-12">
+    <div class="info" id="info">
+     <center>
+     </center>
+     <center>
+      <div style="font-size:10;font-family: monospace;">
+       PREVCALL: malloc(100) = 0x9986080
+      </div>
+     </center>
+     <center>
+      CURRENTCALL: free(0x9986008)
+      <div style="font-size:20;font-family: monospace;">
+      </div>
+     </center>
+     <center>
+      <div style="font-size:10;font-family: monospace;">
+       NEXTCALL: free(0x9986070)
+      </div>
+     </center>
+    </div>
+    <hr>
+    </hr>
+   </div>
+  </div>
+  <div class="row">
+   <div class="col-md-2">
+    <div class="state" id="heap_state">
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(255, 255, 255);;">
+      [F]0x9986004-small chunk[104]
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(189, 148, 88);;">
+      0x998606c-fast_chunk[16]
+     </div>
+     <div class="block normal" style="width: 100%; height: 6%; background-color: rgb(137, 108, 195);;">
+      0x998607c-small chunk[104]
+     </div>
+     <div class="block normal" style="width: 100%; height: 100%; background-color: rgb(0, 255, 0);;">
+      TOP CHUNK
+     </div>
+    </div>
+   </div>
+   <div class="col-md-10">
+    <div class="dumps follow-scroll">
+     <div class="row">
+      <ul class="nav nav-tabs">
+       <li class="active">
+        <a class="tablinks" href="#" onclick="showTab(event, 'Heap')">
+         Heap
+        </a>
+       </li>
+       <li>
+        <a href="#" onclick="showTab(event, 'Libc')">
+         Libc
+        </a>
+       </li>
+      </ul>
+      <div class="tabcontent" id="Heap">
+       <div class="col-md-12">
+        <div class="hexdump" id="heapdump">
+         <font style="color: black; font-weight: bold;">
+          0x9986000
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000069 f77247b0 f77247b0 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986020
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986040
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986060
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000068
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(189, 148, 88);;">
+          00000010 00000000 00000000 00000000
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(137, 108, 195);;">
+          00000069
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986080
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(137, 108, 195);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99860a0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(137, 108, 195);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99860c0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(137, 108, 195);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99860e0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(137, 108, 195);;">
+          00000000
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00020f21 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986100
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986120
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986140
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986160
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986180
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99861a0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99861c0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x99861e0
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986200
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986220
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986240
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0x9986260
+         </font>
+         <font style="font-family: monospace;display:inline; color: rgb(0, 0, 0);;">
+          00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+         </font>
+         <div style="font-size:0;height:1px;">
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="tabcontent" id="Libc" style="display: none">
+       <div class="col-md-12">
+        <div class="hexdump" id="libcdump">
+         <font style="color: black; font-weight: bold;">
+          0xf7724780
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          00000000 00000001 00000000 00000000 00000000 00000000 00000000 00000000
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77247a0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          00000000 00000000 00000000 00000000 099860e0 00000000 09986000 09986000
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77247c0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77247b8 f77247b8 f77247c0 f77247c0 f77247c8 f77247c8 f77247d0 f77247d0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77247e0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77247d8 f77247d8 f77247e0 f77247e0 f77247e8 f77247e8 f77247f0 f77247f0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724800
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77247f8 f77247f8 f7724800 f7724800 f7724808 f7724808 f7724810 f7724810
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724820
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724818 f7724818 f7724820 f7724820 f7724828 f7724828 f7724830 f7724830
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724840
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724838 f7724838 f7724840 f7724840 f7724848 f7724848 f7724850 f7724850
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724860
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724858 f7724858 f7724860 f7724860 f7724868 f7724868 f7724870 f7724870
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724880
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724878 f7724878 f7724880 f7724880 f7724888 f7724888 f7724890 f7724890
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77248a0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724898 f7724898 f77248a0 f77248a0 f77248a8 f77248a8 f77248b0 f77248b0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77248c0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77248b8 f77248b8 f77248c0 f77248c0 f77248c8 f77248c8 f77248d0 f77248d0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77248e0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77248d8 f77248d8 f77248e0 f77248e0 f77248e8 f77248e8 f77248f0 f77248f0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724900
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77248f8 f77248f8 f7724900 f7724900 f7724908 f7724908 f7724910 f7724910
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724920
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724918 f7724918 f7724920 f7724920 f7724928 f7724928 f7724930 f7724930
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724940
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724938 f7724938 f7724940 f7724940 f7724948 f7724948 f7724950 f7724950
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724960
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724958 f7724958 f7724960 f7724960 f7724968 f7724968 f7724970 f7724970
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724980
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724978 f7724978 f7724980 f7724980 f7724988 f7724988 f7724990 f7724990
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77249a0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724998 f7724998 f77249a0 f77249a0 f77249a8 f77249a8 f77249b0 f77249b0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77249c0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77249b8 f77249b8 f77249c0 f77249c0 f77249c8 f77249c8 f77249d0 f77249d0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf77249e0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77249d8 f77249d8 f77249e0 f77249e0 f77249e8 f77249e8 f77249f0 f77249f0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724a00
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f77249f8 f77249f8 f7724a00 f7724a00 f7724a08 f7724a08 f7724a10 f7724a10
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724a20
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724a18 f7724a18 f7724a20 f7724a20 f7724a28 f7724a28 f7724a30 f7724a30
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724a40
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724a38 f7724a38 f7724a40 f7724a40 f7724a48 f7724a48 f7724a50 f7724a50
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724a60
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724a58 f7724a58 f7724a60 f7724a60 f7724a68 f7724a68 f7724a70 f7724a70
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724a80
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724a78 f7724a78 f7724a80 f7724a80 f7724a88 f7724a88 f7724a90 f7724a90
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724aa0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724a98 f7724a98 f7724aa0 f7724aa0 f7724aa8 f7724aa8 f7724ab0 f7724ab0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724ac0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724ab8 f7724ab8 f7724ac0 f7724ac0 f7724ac8 f7724ac8 f7724ad0 f7724ad0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724ae0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724ad8 f7724ad8 f7724ae0 f7724ae0 f7724ae8 f7724ae8 f7724af0 f7724af0
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724b00
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724af8 f7724af8 f7724b00 f7724b00 f7724b08 f7724b08 f7724b10 f7724b10
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724b20
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724b18 f7724b18 f7724b20 f7724b20 f7724b28 f7724b28 f7724b30 f7724b30
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724b40
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724b38 f7724b38 f7724b40 f7724b40 f7724b48 f7724b48 f7724b50 f7724b50
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724b60
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724b58 f7724b58 f7724b60 f7724b60 f7724b68 f7724b68 f7724b70 f7724b70
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724b80
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724b78 f7724b78 f7724b80 f7724b80 f7724b88 f7724b88 f7724b90 f7724b90
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724ba0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724b98 f7724b98 f7724ba0 f7724ba0 00000000 00000000 00000000 00000000
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+         <font style="color: black; font-weight: bold;">
+          0xf7724bc0
+         </font>
+         <p style="font-family: monospace;display:inline;">
+          f7724780 00000000 00000001 00021000 00021000 f75e5310 f75e6410 f76cee0e
+         </p>
+         <div style="font-size:0;height:1px;">
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+ <script>
+  function showTab(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+ </script>
+</body>

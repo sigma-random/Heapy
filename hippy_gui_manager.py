@@ -58,7 +58,7 @@ class HippyGuiManager:
     # related to the state of the heap
     def write_state_info(self,prev_state,next_state):
         div_info = self.soup.find(id="info") # insert the name of the api now
-
+        
         if prev_state != []:
             center_tag =  self.soup.new_tag("center")
             div_info_line = self.soup.new_tag('div')

@@ -59,7 +59,7 @@ class HippyGuiManager:
     def write_state_info(self,prev_state,next_state):
         div_info = self.soup.find(id="info") # insert the name of the api now
 
-        if prev_state != []:
+        if prev_state != -1:
             center_tag =  self.soup.new_tag("center")
             div_info_line = self.soup.new_tag('div')
             div_info_line.string = "PREVCALL: " + str(prev_state.api_now)
@@ -75,7 +75,7 @@ class HippyGuiManager:
         div_info.append(center_tag)
 
 
-        if next_state != []:
+        if next_state != -1:
             center_tag =  self.soup.new_tag("center")
             div_info_line = self.soup.new_tag('div')
             div_info_line.string = "NEXTCALL: " + str(next_state.api_now)

@@ -5,6 +5,7 @@ import sys
 import random
 import os
 from hippy_gui_manager import HippyGuiManager
+from shutil import copyfile
 
 import pdb
 
@@ -34,6 +35,7 @@ class ProcInfo():
          return 2
      else:
          return 1
+
  def __str__(self):
      repr = "********ProcInfo********\n" + "[+]arch: " + self.architecture + "\n[+]heap_range: " + self.heap_start_address + "-" + self.heap_end_address + "\n[+]libc_version: " + self.libc_version + "\n[+]libc_range: " + self.libc_start_address + "-" + self.libc_end_address + "\n"
      return repr
@@ -440,36 +442,41 @@ operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': reall
 procInfo = None
 timeline = [State()]  # a timeline is a list of State
 
-def Usage():
- print "Usage: python hippy.py <program> [<input_file_name>]\n"
- sys.exit(0)
 
 if __name__ == '__main__':
 
- cmd = "LD_PRELOAD=./tracer.so ./datastore < ./inputs_test2"
+    progam_to_trace = sys.argv[1]  # first argument is the path to the program to trace
 
- p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
- output = p.stderr.read()
+    cmd = "LD_PRELOAD=./tracer.so" + " " + progam_to_trace
 
- # dump the output on file in order to lately read it line by line
- with open("./traced_out", "w") as f:
-     f.write(output)
+    working_directory = os.getcwd()
 
- f = open("./traced_out")
- content = f.readlines()
- f.close()
+    if len(sys.argv) == 3:
+        input_program = sys.argv[2]
+        cmd += " <" + input_program
 
- parseProgramOut(content)
- procInfo = buildProcInfo()
+    p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
+    output = p.stderr.read()
 
- print procInfo
- buildTimeline()
- timeline = timeline[:-1] # remove last state
- cont = 1
+    # dump the output on file in order to lately read it line by line
+    with open("./traced_out", "w") as f:
+        f.write(output)
 
- for s in timeline:
-     print "timeline[" + str(cont) + "]:\n"
-     print s
-     cont+=1
+    f = open("./traced_out")
+    content = f.readlines()
+    f.close()
 
- buildHtml(timeline)
+    parseProgramOut(content)
+    procInfo = buildProcInfo()
+
+    print procInfo
+    buildTimeline()
+    timeline = timeline[:-1] # remove last state
+    cont = 1
+
+    for s in timeline:
+        print "timeline[" + str(cont) + "]:\n"
+        print s
+        cont+=1
+
+    buildHtml(timeline)

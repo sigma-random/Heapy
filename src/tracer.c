@@ -23,6 +23,7 @@ ready to be allocated.
 #include <stdio.h>
 #include <stdlib.h> //needed for strtoul ( otherwise the conversion from a uint64 string to uint64 keep only the lowest part )
 #include <dlfcn.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdint.h>
 

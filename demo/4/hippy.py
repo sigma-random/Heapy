@@ -149,7 +149,7 @@ def malloc(state,api_args,api_info,api_ret,api_counter):
         if int(usable_size,10) < int(prev_freed_chunk.raw_size,10): # we have allocated a chunk in a bigger freed chunk ( we have a remainder ), let's update the chunk and create the reminder
             # calculate the remainder
             remainder_size = str(int(prev_freed_chunk.raw_size,10) - int(usable_size,10))
-            remainder_addr = hex(int(api_ret,16) + int(usable_size,10) + procInfo.getArchMutiplier() * 4)
+            remainder_addr = hex(int(api_ret,16) +  int(usable_size,10) + procInfo.getArchMutiplier() * 4)
             chunk = Chunk(remainder_addr,remainder_size,remainder_size,random_color(),"free")
             state.append(chunk)
 
@@ -442,18 +442,31 @@ operations = {'free': free, 'malloc': malloc, 'calloc': calloc, 'realloc': reall
 procInfo = None
 timeline = [State()]  # a timeline is a list of State
 
+def Usage():
+    print "Usage: python hippy.py trace_me_32 [input.out]\n"
+    sys.exit(0)
 
 if __name__ == '__main__':
 
-    progam_to_trace = sys.argv[1]  # first argument is the path to the program to trace
+    if len(sys.argv) < 2:
+     Usage()
+    elif len(sys.argv) == 2:
+        program_to_trace = sys.argv[1]
+        input_for_program = ""
+    elif len(sys.argv) == 3:
+        program_to_trace = sys.argv[1]
+        input_for_program = sys.argv[2]
 
-    cmd = "LD_PRELOAD=./tracer.so" + " " + progam_to_trace
+    cmd = "file " + "./" + program_to_trace
+    pinfo = Popen(cmd, shell=True, stdout=PIPE, close_fds=True)
+    output = pinfo.stdout.read()
 
-    working_directory = os.getcwd()
+    if "ELF 64-bit" in output:
+        path_arch = "amd64"
+    elif "ELF 32-bit" in output:
+        path_arch = "i386"
 
-    if len(sys.argv) == 3:
-        input_program = sys.argv[2]
-        cmd += " <" + input_program
+    cmd = "LD_PRELOAD=./tracer.so ./datastore < ./inputs_test2"
 
     p = Popen(cmd, shell=True, stderr=PIPE, close_fds=True)
     output = p.stderr.read()

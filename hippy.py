@@ -233,7 +233,7 @@ def sort(state):
 
 # for example in the libc 2.19 the information about flags are at the line 34 of the libc_dump file.
 # in another libc version it could be in another position.
-supported_libc = {"2.19-32" : 34 , "2.23-32": 61 ,  "2.23-64": 90 }
+supported_libc = {"2.19-32" : 34 ,  "2.19-64" : 60, "2.23-32": 61 ,  "2.23-64": 90 }
 
 # This function check the bit FASTCHUNKS_BIT in order to discover if it has been resetted to 1
 # and so if malloc_consolidate has been called
@@ -427,8 +427,8 @@ def doHexDumpTag(chunk,dump_name):
                 print "Something strange happen, skipping this chunk"
 
 def buildHtml(timeline):
-    print "[+]Generating your awesome report"
-    hippy_gui_manager = HippyGuiManager()
+    print "[+]Generating report"
+    hippy_gui_manager = HippyGuiManager(len(timeline))
     prev_state = []
     for index,state in enumerate(timeline):
         try:

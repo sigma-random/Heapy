@@ -3,16 +3,15 @@ import copy
 import sys
 from bs4 import BeautifulSoup
 
-import pdb
 # configurable parameter libc-version dependent
 # these are the lines to take in order to retrieve the malloc_state
 # from the libc data segment
 # f.i. 2.23-32 is the libc 2.23 on 32 bit, 61-96 means that from line 61 to 95 of the hexdump we have the info about bins
-supported_libc = {"2.23-32": "61-95" , "2.23-64": "89-158"}
+supported_libc = {"2.19-64": "60-128", "2.23-32": "61-95" , "2.23-64": "89-158"}
 
 class HippyGuiManager:
 
-    def __init__(self):
+    def __init__(self,number_of_states):
         self.html_report_base = "/home/degrigis/Project/Hippy/gui/base2.html" # base html to modify in order to draw the current state
         self.html_report_folder = "./StateHtmlReports" # this folder will contains all the html generated that describe a state
         self.html_report_current_name = "heapstate_X"  # this will be the name of the generated html report
@@ -24,7 +23,7 @@ class HippyGuiManager:
         self.current_state_libc_dump = "" # passed later in the run method
         self.soup = []
         self.proc_info = []
-        self.passed = False
+        self.number_of_states = number_of_states
         return
 
     def run(self,prev_state,current_state_obj, next_state, proc_info):
@@ -46,6 +45,23 @@ class HippyGuiManager:
         self.paste_heap_dump(self.current_state_obj,proc_info)
         self.paste_libc_dump(self.current_state_obj,proc_info)
 
+        # a pinch of javascript for better navigation between reports
+
+        div_script = self.soup.find(id="lolscripts")
+
+        if self.html_report_counter > self.number_of_states:
+            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + "\";}"
+        else:
+            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter) + "\";}"
+
+        if self.html_report_counter-1 == 1:
+            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + "\";}"
+        else:
+            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-2) + "\";}"
+
+        div_script.append(javascript_next)
+        div_script.append(javascript_prev)
+
         # ok, let's save the modified html
         heap_state_html = self.soup.prettify("utf-8")
         with open(html_report_full_path, "wb") as file:
@@ -58,7 +74,7 @@ class HippyGuiManager:
     # related to the state of the heap
     def write_state_info(self,prev_state,next_state):
         div_info = self.soup.find(id="info") # insert the name of the api now
-        
+
         if prev_state != []:
             center_tag =  self.soup.new_tag("center")
             div_info_line = self.soup.new_tag('div')

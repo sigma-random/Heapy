@@ -107,11 +107,31 @@ class Chunk():
 
  def getChunkType(self,raw_size):
      raw_size = int(raw_size,10)
-     if raw_size >= 8 and raw_size <= 80: # TODO: see sploitfun tutorial for correct parametric range
+     arch_multiplier = procInfo.getArchMutiplier()
+
+     # From libc code:
+     #
+     # define SIZE_SZ 8
+     # define MALLOC_ALIGNMENT SIZE_SZ * 2
+     # define NBINS             128
+     # define NSMALLBINS         64
+     # define SMALLBIN_WIDTH    MALLOC_ALIGNMENT
+     # define SMALLBIN_CORRECTION (MALLOC_ALIGNMENT > 2 * SIZE_SZ)
+     # define MIN_LARGE_SIZE    ((NSMALLBINS - SMALLBIN_CORRECTION) * SMALLBIN_WIDTH)
+
+     malloc_alignment = 2 * 4 * arch_multiplier
+     nsmallbins = 64
+     smallbin_correction = malloc_alignment
+
+     max_fast = (80 *  arch_multiplier / 4)
+     max_small = 512 * arch_multiplier
+     min_large = max_small
+
+     if raw_size >= 8 and raw_size <= max_fast:  #https://github.com/sploitfun/lsploits/blob/master/glibc/malloc/malloc.c#L1600
          return "fast_chunk"
-     if raw_size > 80 and raw_size < 512:
+     if raw_size > max_fast and raw_size <= max_small:
          return "small chunk"
-     if raw_size >= 512:
+     if raw_size > min_large:
          return "large chunk"
      return ""
 

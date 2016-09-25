@@ -2,6 +2,7 @@ import os
 import copy
 import sys
 from bs4 import BeautifulSoup
+import pdb
 
 # configurable parameter libc-version dependent
 # these are the lines to take in order to retrieve the malloc_state
@@ -41,6 +42,7 @@ class HippyGuiManager:
 
         # now let's start the serious business
         self.write_state_info(prev_state,next_state)
+        self.write_generic_info(prev_state,next_state)
         self.build_heap_state()
         self.paste_heap_dump(self.current_state_obj,proc_info)
         self.paste_libc_dump(self.current_state_obj,proc_info)
@@ -69,6 +71,15 @@ class HippyGuiManager:
 
         self.soup = []
 
+    def write_generic_info(self,prev_state,next_state):
+        div_info = self.soup.find(id="ginfo") # insert the name of the api now
+        center_text = self.soup.new_tag('center')
+        ginfo = "heap-range:   " + self.proc_info.heap_start_address + " - " + self.proc_info.heap_end_address + " | " + "libc-range:   " + self.proc_info.libc_start_address + " - " + self.proc_info.libc_end_address + " | " + "libc-version: " + self.proc_info.libc_version
+        center_text.string = ginfo
+
+        div_info.append(center_text)
+
+
 
     # this function will write the current api invoked and other information
     # related to the state of the heap
@@ -84,12 +95,12 @@ class HippyGuiManager:
             div_info.append(center_tag)
 
         center_tag =  self.soup.new_tag("center")
+        center_tag['style'] = "background:#ccff99;"
         div_info_line = self.soup.new_tag('div')
         center_tag.string = "CURRENTCALL: " + self.current_state_obj.api_now
         div_info_line['style'] = "font-size:20;font-family: monospace;"
         center_tag.append(div_info_line)
         div_info.append(center_tag)
-
 
         if next_state != []:
             center_tag =  self.soup.new_tag("center")

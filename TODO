@@ -1,7 +1,5 @@
 2- fixare bug prev call and next call quando il top chunk riprende tutto l'heap
 3- evidenziare heap bug quando un chunk si alloca sopra un chunk allocato ( heap overwriting )
 4- evidenziare situazione in cui un chunk viene allocato su indirizzi diversi da heap range ( stack-house of force )
-5- fixare bug grafici ( scroll )
 6- documentazione e refactoring di pattumiera 
-7- fixare scrolling del panel dell'heap e dell'hexdump ( http://stackoverflow.com/questions/23439358/a-scrolling-fixed-height-div-in-bootstrap-column )
-8- inserire info su range heap
+

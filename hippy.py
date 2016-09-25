@@ -118,12 +118,12 @@ class Chunk():
      # define SMALLBIN_WIDTH    MALLOC_ALIGNMENT
      # define SMALLBIN_CORRECTION (MALLOC_ALIGNMENT > 2 * SIZE_SZ)
      # define MIN_LARGE_SIZE    ((NSMALLBINS - SMALLBIN_CORRECTION) * SMALLBIN_WIDTH)
-
+     size_sz = 4 * arch_multiplier
      malloc_alignment = 2 * 4 * arch_multiplier
      nsmallbins = 64
      smallbin_correction = malloc_alignment
 
-     max_fast = (80 *  arch_multiplier / 4)
+     max_fast = (80 * size_sz / 4)
      max_small = 512 * arch_multiplier
      min_large = max_small
 

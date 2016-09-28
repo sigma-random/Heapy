@@ -1,5 +1,5 @@
 2- fixare bug prev call and next call quando il top chunk riprende tutto l'heap
 3- evidenziare heap bug quando un chunk si alloca sopra un chunk allocato ( heap overwriting )
 4- evidenziare situazione in cui un chunk viene allocato su indirizzi diversi da heap range ( stack-house of force )
-6- documentazione e refactoring di pattumiera 
+6- documentazione e refactoring di pattumiera ( new_name-> heapy )
 

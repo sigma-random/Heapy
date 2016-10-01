@@ -2,48 +2,66 @@ Current working dir: /home/degrigis/Project/Hippy/demo/2
 
 
 <hippy-d75d6fc7>
-{"type": "procinfo","heap_range": {"heap_start_address": "0x01741000","heap_end_address": "0x01762000"}, "libc_version": "2.23" , "libc_range":                  {"libc_start_address": "0x7f3ad939a000","libc_end_address": "0x7f3ad939c000"}, "arch": "64"}
+{"type": "procinfo","heap_range": {"heap_start_address": "0x01806000","heap_end_address": "0x01827000"}, "libc_version": "2.23" , "libc_range":                  {"libc_start_address": "0x7f58dc2ea000","libc_end_address": "0x7f58dc2ec000"}, "arch": "64"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "malloc","api_counter": "1","api_args": { "size": "3000" },"api_info":{"usable_chunk_size": "3000"},"api_return": "0x1741010"}
+{"type":"apicall","api_name": "malloc","api_counter": "1","api_args": { "size": "3000" },"api_info":{"usable_chunk_size": "3000"},"api_return": "0x1806010"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "malloc","api_counter": "2","api_args": { "size": "2000" },"api_info":{"usable_chunk_size": "2008"},"api_return": "0x1741bd0"}
+{"type":"apicall","api_name": "malloc","api_counter": "2","api_args": { "size": "2000" },"api_info":{"usable_chunk_size": "2008"},"api_return": "0x1806bd0"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "malloc","api_counter": "3","api_args": { "size": "12300" },"api_info":{"usable_chunk_size": "12312"},"api_return": "0x17423b0"}
+{"type":"apicall","api_name": "malloc","api_counter": "3","api_args": { "size": "29" },"api_info":{"usable_chunk_size": "40"},"api_return": "0x18073b0"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "free","api_counter": "4", "api_args": { "address": "0x1741bd0"}}
+{"type":"apicall","api_name": "malloc","api_counter": "4","api_args": { "size": "129" },"api_info":{"usable_chunk_size": "136"},"api_return": "0x18073e0"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "free","api_counter": "5", "api_args": { "address": "0x17423b0"}}
+{"type":"apicall","api_name": "malloc","api_counter": "5","api_args": { "size": "12300" },"api_info":{"usable_chunk_size": "12312"},"api_return": "0x1807470"}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "free","api_counter": "6", "api_args": { "address": "0x1741010"}}
+{"type":"apicall","api_name": "free","api_counter": "6", "api_args": { "address": "0x1806bd0"}}
 </hippy-d75d6fc7>
 
 
 
 <hippy-d75d6fc7>
-{"type":"apicall","api_name": "malloc","api_counter": "7","api_args": { "size": "3242" },"api_info":{"usable_chunk_size": "3256"},"api_return": "0x1741010"}
+{"type":"apicall","api_name": "free","api_counter": "7", "api_args": { "address": "0x1807470"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "8","api_args": { "size": "29" },"api_info":{"usable_chunk_size": "40"},"api_return": "0x1806bd0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "9", "api_args": { "address": "0x1806010"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "10","api_args": { "size": "3242" },"api_info":{"usable_chunk_size": "3256"},"api_return": "0x1807470"}
 </hippy-d75d6fc7>
 

@@ -168,16 +168,19 @@ def malloc(state,api_args,api_info,api_ret,api_counter):
 
         if int(usable_size,10) < int(prev_freed_chunk.raw_size,10): # we have allocated a chunk in a bigger freed chunk ( we have a remainder ), let's update the chunk and create the reminder
             # calculate the remainder
-            remainder_size = str(int(prev_freed_chunk.raw_size,10) - int(usable_size,10))
+            remainder_size = str(int(prev_freed_chunk.raw_size,10) - int(usable_size,10) - 8)
             remainder_addr = hex(int(api_ret,16) + int(usable_size,10) + procInfo.getArchMutiplier() * 4)
-            chunk = Chunk(remainder_addr,remainder_size,remainder_size,random_color(),"free")
+            black_color = ('0','0','0')
+            chunk = Chunk(remainder_addr,remainder_size,remainder_size,black_color,"free")
             state.append(chunk)
 
         # let's update the reused chunk!
         prev_freed_chunk.size = api_args['size']
         prev_freed_chunk.raw_size = usable_size
         prev_freed_chunk.full_chunk_size = str(int(prev_freed_chunk.raw_size,10) + procInfo.getArchMutiplier() * 4)
+        prev_freed_chunk.chunk_end_addr = hex((int(prev_freed_chunk.raw_addr,16) + int(prev_freed_chunk.full_chunk_size,10)))
         prev_freed_chunk.status = "allocated"
+        prev_freed_chunk.type = prev_freed_chunk.getChunkType(usable_size)
         prev_freed_chunk.color = random_color() # since this is a new chunk let's pick another color
 
 

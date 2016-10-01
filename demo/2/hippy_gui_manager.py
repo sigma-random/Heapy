@@ -3,6 +3,7 @@ import copy
 import sys
 from bs4 import BeautifulSoup
 import pdb
+import math
 
 # configurable parameter libc-version dependent
 # these are the lines to take in order to retrieve the malloc_state
@@ -71,6 +72,10 @@ class HippyGuiManager:
 
         self.soup = []
 
+    def getChunkSizeBySize(self,size):
+        return math.log(size,2) + 3
+
+
     def write_generic_info(self,prev_state,next_state):
         div_info = self.soup.find(id="ginfo") # insert the name of the api now
         center_text = self.soup.new_tag('center')
@@ -78,8 +83,6 @@ class HippyGuiManager:
         center_text.string = ginfo
 
         div_info.append(center_text)
-
-
 
     # this function will write the current api invoked and other information
     # related to the state of the heap
@@ -120,7 +123,7 @@ class HippyGuiManager:
                 div_heap_state = self.soup.find(id="heap_state")
                 block_tag = self.soup.new_tag("div")
                 block_tag['class'] = "block normal"
-                block_layout = "width: 100%; height: 6%; background-color: rgb(RXXX, GXXX, BXXX);;"
+                block_layout = "width: 100%; height: " + str(self.getChunkSizeBySize(int(chunk.full_chunk_size,10))) + "%; background-color: rgb(RXXX, GXXX, BXXX);;"
                 block_layout = block_layout.replace("RXXX",r)
                 block_layout = block_layout.replace("GXXX",g)
                 block_layout = block_layout.replace("BXXX",b)
@@ -131,7 +134,7 @@ class HippyGuiManager:
                 div_heap_state = self.soup.find(id="heap_state")
                 block_tag = self.soup.new_tag("div")
                 block_tag['class'] = "block normal"
-                block_layout = "width: 100%; height: 6%; background-color: rgb(255, 255, 255);;"
+                block_layout = "width: 100%; height: " + str(self.getChunkSizeBySize(int(chunk.full_chunk_size,10))) + "%; background-color: rgb(255, 255, 255);;"
                 block_tag['style'] = block_layout
                 block_tag.string = "[F]" + chunk.raw_addr + "-" + chunk.type + "[" + chunk.full_chunk_size + "]"
                 div_heap_state.append(block_tag)

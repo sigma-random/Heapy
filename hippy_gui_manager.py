@@ -73,7 +73,7 @@ class HippyGuiManager:
         self.soup = []
 
     def getChunkSizeBySize(self,size):
-        return math.log(size,2) + 3
+        return round(math.log(size,2) + 3,3)
 
 
     def write_generic_info(self,prev_state,next_state):

@@ -236,11 +236,35 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
         free(state,api_args,None,None,None)
     else:
         index,res = state.getChunkAt(address_to_realloc) # let's search the chunk that has been reallocated
+
         if api_ret == address_to_realloc:
-            state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
-            state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
-            state.dump_name = dump_name + api_counter
-            state.libc_dump_name = libc_dump_name + api_counter
+            # in this case we have or (1) the reallocation of a chunk above the top chunk or (2) the chunk to be reallocated
+            # borders a free chunk that can handle the new size
+            try:
+                next_chunk = state[index+1]
+            except:
+                # we are in the case (1) since there is no chunk after this
+                state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
+                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+                state.dump_name = dump_name + api_counter
+                state.libc_dump_name = libc_dump_name + api_counter
+
+            # if state[index+1] is a valid chunk we have to handle this situation
+            remaind_size = int(newsize,10) - int(state[index].raw_size,10) # this is how much we need to take from the next chunk
+
+            if remaind_size == next_chunk.raw_size:
+                del state[index+1] # if we cover all the chunk we need to remove it
+            else:
+                pdb.set_trace()
+                state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
+                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+                state.dump_name = dump_name + api_counter
+                state.libc_dump_name = libc_dump_name + api_counter
+                remainder_size = int(next_chunk.full_chunk_size,10) - remaind_size
+                remainder_addr = hex(int(next_chunk.raw_addr,16) + remaind_size + 4 * procInfo.getArchMutiplier() + 1)
+                state[index+1] = Chunk(remainder_addr,str(remainder_size), str(remainder_size - 4 * procInfo.getArchMutiplier()) ,('0','0','0'),"free")
+
+
         else:
             new_api_args = {}
             new_api_args['address'] = api_info['internal_api_call']['api_args']['address']

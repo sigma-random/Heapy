@@ -123,6 +123,7 @@ class HippyGuiManager:
                 div_heap_state = self.soup.find(id="heap_state")
                 block_tag = self.soup.new_tag("div")
                 block_tag['class'] = "block normal"
+                block_tag['id'] = "c_" + chunk.raw_addr
                 block_layout = "width: 100%; height: " + str(self.getChunkSizeBySize(int(chunk.full_chunk_size,10))) + "%; background-color: rgb(RXXX, GXXX, BXXX);;"
                 block_layout = block_layout.replace("RXXX",r)
                 block_layout = block_layout.replace("GXXX",g)
@@ -219,14 +220,13 @@ class HippyGuiManager:
                 # now let's follow the indication inside table in order
                 # to print the dwords
                 prev_color = ""
-                dwords = ""
+                single_dword = []
                 for t in table:
                     curr_color = t[2] # take the color from the tuple
                     if curr_color != prev_color: # we need to open a new tag
-                        if dwords != "":
-                            dword_tag.string = dwords
+                        if single_dword != []:
                             div_heapdump.append(dword_tag)
-                            dwords = ""
+                            single_dword = []
                         r,g,b = curr_color[0],curr_color[1],curr_color[2]
                         dword_tag = self.soup.new_tag('font')
                         dword_tag_style = "font-family: monospace;display:inline; color: rgb(RXXX, GXXX, BXXX);;"
@@ -234,14 +234,26 @@ class HippyGuiManager:
                         dword_tag_style = dword_tag_style.replace("GXXX",g)
                         dword_tag_style = dword_tag_style.replace("BXXX",b)
                         dword_tag['style'] = dword_tag_style
-                        dwords = dwords + " " + t[1]
+
+                        single_dword = self.soup.new_tag('font')
+                        single_dword['id'] = "dw_" + hex(int(t[0],16))
+                        target_chunk_div = "#c_" + hex(int(t[0],16))
+                        single_dword['onclick'] = "chunk_focus(\"" + target_chunk_div + "\")"
+                        single_dword['title'] = hex(int(t[0],16))
+                        single_dword.string = t[1]
+                        dword_tag.append(single_dword)
+
+                        #dwords = dwords + " " + t[1]
                         prev_color = curr_color
                     else:
-                        dwords = dwords + " " + t[1]
+                        #dwords = dwords + " " + t[1]
+                        single_dword = self.soup.new_tag('font')
+                        single_dword['title'] = hex(int(t[0],16))
+                        single_dword.string = t[1]
+                        dword_tag.append(single_dword)
                         prev_color = curr_color
 
-                if dwords != "":
-                    dword_tag.string = dwords
+                if single_dword != []:
                     div_heapdump.append(dword_tag)
 
                 div_space_tag = self.soup.new_tag('div')

@@ -1,4 +1,3 @@
-2- tooltip su word per displayare indirizzo 
 3- evidenziare heap bug quando un chunk si alloca sopra un chunk allocato ( heap overwriting, striped chunks  )
 4- evidenziare situazione in cui un chunk viene allocato su indirizzi diversi da heap range ( stack-house of force, allarme vicino alla malloc )
 5- visualizzare eglio le bins 

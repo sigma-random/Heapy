@@ -1,7 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="" />
+    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO" afterPath="$PROJECT_DIR$/TODO" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_1" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_10" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_10" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_11" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_11" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_12" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_12" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_13" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_13" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_14" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_14" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_15" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_15" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_16" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_16" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_17" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_17" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_18" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_18" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_19" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_19" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_2" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_20" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_20" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_21" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_21" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_22" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_22" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_23" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_23" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_24" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_24" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_25" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_25" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_26" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_26" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_27" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_27" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_3" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_4" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_5" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_6" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_6" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_7" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_7" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_8" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_8" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_9" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_9" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_1" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_10" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_10" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_11" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_11" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_12" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_12" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_13" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_13" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_14" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_14" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_15" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_15" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_16" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_16" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_17" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_17" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_18" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_18" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_19" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_19" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_2" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_20" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_20" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_21" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_21" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_22" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_22" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_23" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_23" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_24" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_24" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_25" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_25" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_26" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_26" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_27" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_27" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_3" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_4" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_5" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_6" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_6" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_7" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_7" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_8" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_8" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_9" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_9" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_1" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_1" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_10" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_10" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_11" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_11" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_12" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_12" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_13" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_13" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_14" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_14" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_15" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_15" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_16" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_16" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_17" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_17" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_18" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_18" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_19" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_19" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_2" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_2" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_20" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_20" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_21" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_21" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_22" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_22" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_23" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_23" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_24" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_24" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_25" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_25" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_26" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_26" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_27" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_27" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_3" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_3" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_4" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_4" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_5" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_5" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_6" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_6" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_7" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_7" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_8" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_8" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_9" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_9" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/heap_log" afterPath="$PROJECT_DIR$/demo/4/heap_log" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/hippy_gui_manager.py" afterPath="$PROJECT_DIR$/demo/4/hippy_gui_manager.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/traced_out" afterPath="$PROJECT_DIR$/demo/4/traced_out" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/base2.html" afterPath="$PROJECT_DIR$/gui/base2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hippy_gui_manager.py" afterPath="$PROJECT_DIR$/hippy_gui_manager.py" />
+    </list>
     <ignored path="Hippy.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,27 +107,23 @@
     <favorites_list name="Hippy" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="hippy.py" pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="hippy.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/hippy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="401">
-              <caret line="235" column="22" selection-start-line="235" selection-start-column="22" selection-end-line="235" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="995">
+              <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="hippy_gui_manager.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="hippy_gui_manager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
-              <caret line="32" column="31" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2610">
+              <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -54,13 +138,14 @@
       <list>
         <option value="$PROJECT_DIR$/hippy_coalesc_manager.py" />
         <option value="$PROJECT_DIR$/hippy.py" />
+        <option value="$PROJECT_DIR$/hippy_gui_manager.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1279" />
-    <option name="width" value="1922" />
-    <option name="height" value="1081" />
+    <option name="x" value="1280" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -108,24 +193,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1279" y="0" width="1922" height="1081" extended-state="6" />
+    <frame x="1280" y="0" width="1920" height="1080" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -146,31 +231,42 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hippy_coalesc_manager.py">
+    <entry file="file://$PROJECT_DIR$/hippy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="522">
           <caret line="32" column="31" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hippy_coalesc_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/hippy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="401">
-          <caret line="235" column="22" selection-start-line="235" selection-start-column="22" selection-end-line="235" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="995">
+          <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2610">
+          <caret line="65" column="31" selection-start-line="65" selection-start-column="31" selection-end-line="65" selection-end-column="31" />
+          <folding />
         </state>
       </provider>
     </entry>

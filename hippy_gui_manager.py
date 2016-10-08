@@ -204,7 +204,7 @@ class HippyGuiManager:
             current_memory_addr = line.split(" ")[0]
             if int(current_memory_addr,16) < int(highest_heap_address,16): # print only until the highest address reached during the execution until now
                 font_tag = self.soup.new_tag('font')
-                font_tag['style'] = "color: black; font-weight: bold;"
+                font_tag['style'] = "font-family: monospace; color: black; font-weight: bold;"
                 font_tag.string = current_memory_addr # let's paint the address
                 div_heapdump.append(font_tag)
 

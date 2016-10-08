@@ -189,7 +189,7 @@ def malloc(state,api_args,api_info,api_ret,api_counter):
         state.append(chunk)
 
     if state.api_now == "":
-        state.api_now = "malloc(" + api_args['size'] + ") = " + api_ret  # keep track of the api called in this state
+        state.api_now = "malloc(" + api_args['size'] + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)  # keep track of the api called in this state
     if state.dump_name == "":
         state.dump_name = dump_name + api_counter
     if state.libc_dump_name == "":
@@ -211,7 +211,7 @@ def free(state,api_args,api_info,api_ret,api_counter):
                 state.fastchunks_bit = 0 # following ptmalloc whenever a fastbin is released the fastchunks_bit is cleared, now if it will be resetted to 1 it means that a call to malloc_consolidate has been done.
 
         if state.api_now == "":
-            state.api_now = "free(" + freed_address + ")"
+            state.api_now = "free(" + hex(int(freed_address,16) -procInfo.getArchMutiplier() * 4 ) + ")"
         if state.dump_name == "":
             state.dump_name = dump_name + api_counter
         if state.libc_dump_name == "":
@@ -255,7 +255,6 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
             if remaind_size == next_chunk.raw_size:
                 del state[index+1] # if we cover all the chunk we need to remove it
             else:
-                pdb.set_trace()
                 state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
                 state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
                 state.dump_name = dump_name + api_counter

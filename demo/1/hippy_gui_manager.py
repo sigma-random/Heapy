@@ -4,7 +4,7 @@ import sys
 from bs4 import BeautifulSoup
 import pdb
 import math
-import libc219
+import gui_painters.libc219
 
 # configurable parameter libc-version dependent
 # these are the lines to take in order to retrieve the malloc_state
@@ -265,4 +265,4 @@ class HippyGuiManager:
 
     def paste_libc_dump(self,state,proc_info):
         libc_dump_full_path = self.libc_dump_folder + state.libc_dump_name
-        libc219.format(libc_dump_full_path,proc_info,self.soup)
+        libc219.format(libc_dump_full_path,proc_info)

@@ -1,95 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_1" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_10" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_10" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_11" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_11" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_12" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_12" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_13" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_14" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_14" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_15" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_15" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_16" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_16" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_17" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_17" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_18" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_18" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_19" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_19" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_2" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_20" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_20" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_21" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_21" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_22" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_22" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_23" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_23" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_24" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_24" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_25" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_25" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_26" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_26" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_27" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_27" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_3" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_4" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_5" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_6" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_7" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_8" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_9" afterPath="$PROJECT_DIR$/demo/4/HeapDumps/heap_dump_9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_1" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_10" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_10" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_11" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_11" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_12" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_12" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_13" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_14" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_14" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_15" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_15" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_16" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_16" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_17" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_17" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_18" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_18" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_19" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_19" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_2" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_20" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_20" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_21" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_21" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_22" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_22" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_23" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_23" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_24" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_24" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_25" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_25" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_26" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_26" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_27" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_27" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_3" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_4" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_5" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_6" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_7" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_8" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_9" afterPath="$PROJECT_DIR$/demo/4/LibcDumps/libc_dump_9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_1" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_1" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_10" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_10" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_11" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_11" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_12" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_12" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_13" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_13" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_14" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_14" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_15" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_15" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_16" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_16" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_17" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_17" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_18" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_18" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_19" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_19" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_2" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_20" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_20" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_21" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_21" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_22" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_22" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_23" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_23" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_24" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_24" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_25" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_25" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_26" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_26" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_27" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_27" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_3" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_4" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_5" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_5" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_6" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_6" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_7" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_8" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_8" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_9" afterPath="$PROJECT_DIR$/demo/4/StateHtmlReports/heapstate_9" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/heap_log" afterPath="$PROJECT_DIR$/demo/4/heap_log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/hippy.py" afterPath="$PROJECT_DIR$/demo/4/hippy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/hippy_gui_manager.py" afterPath="$PROJECT_DIR$/demo/4/hippy_gui_manager.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo/4/traced_out" afterPath="$PROJECT_DIR$/demo/4/traced_out" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hippy.py" afterPath="$PROJECT_DIR$/hippy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hippy_gui_manager.py" afterPath="$PROJECT_DIR$/hippy_gui_manager.py" />
-    </list>
+    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="" />
     <ignored path="Hippy.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -121,8 +33,8 @@
       <file leaf-file-name="hippy_gui_manager.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state relative-caret-position="414">
+              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -194,7 +106,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1279" y="0" width="1922" height="1081" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -274,8 +186,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+        <state relative-caret-position="414">
+          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding />
         </state>
       </provider>

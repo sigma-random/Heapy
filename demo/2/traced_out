@@ -1,0 +1,565 @@
+Current working dir: /home/degrigis/Project/Hippy/demo/2
+
+
+<hippy-d75d6fc7>
+{"type": "procinfo","heap_range": {"heap_start_address": "0x009c1000","heap_end_address": "0x009e2000"}, "libc_version": "2.19" , "libc_range":                  {"libc_start_address": "0x7f9a06176000","libc_end_address": "0x7f9a06178000"}, "arch": "64"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "1","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1010"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "2","api_args": { "size": "512" },"api_info":{"usable_chunk_size": "520"},"api_return": "0x9c1030"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "3","api_args": { "size": "2048" },"api_info":{"usable_chunk_size": "2056"},"api_return": "0x9c1240"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "4","api_args": { "size": "16" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a50"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "5","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "6","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "7","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ab0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "8","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ad0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "9","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1af0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "10","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b10"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "11","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b30"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "12","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b50"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "13","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "14","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "15","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "16", "api_args": { "address": "0x9c1bb0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "17","api_args": { "size": "6" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "18", "api_args": { "address": "0x9c1a70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "19", "api_args": { "address": "0x9c1ab0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "20", "api_args": { "address": "0x9c1af0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "21", "api_args": { "address": "0x9c1b30"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "22", "api_args": { "address": "0x9c1b70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "23", "api_args": { "address": "0x9c1a90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "24", "api_args": { "address": "0x9c1b90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "25", "api_args": { "address": "0x9c1b50"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "26", "api_args": { "address": "0x9c1b10"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "27", "api_args": { "address": "0x9c1ad0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "28", "api_args": { "address": "0x9c1a50"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "29", "api_args": { "address": "0x9c1bb0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "30","api_args": { "size": "16" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "31","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a50"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "32","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ad0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "33","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b10"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "34","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b50"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "35","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "36","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "37","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "38","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b30"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "39","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1af0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "40","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ab0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "41","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "42","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bd0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "43","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bf0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "44", "api_args": { "address": "0x9c1bf0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "45","api_args": { "size": "7" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bf0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "46", "api_args": { "address": "0x9c1a50"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "47", "api_args": { "address": "0x9c1b10"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "48", "api_args": { "address": "0x9c1b90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "49", "api_args": { "address": "0x9c1b70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "50", "api_args": { "address": "0x9c1af0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "51", "api_args": { "address": "0x9c1a70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "52", "api_args": { "address": "0x9c1ad0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "53", "api_args": { "address": "0x9c1bd0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "54", "api_args": { "address": "0x9c1ab0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "55", "api_args": { "address": "0x9c1b30"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "56", "api_args": { "address": "0x9c1a90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "57", "api_args": { "address": "0x9c1b50"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "58", "api_args": { "address": "0x9c1bb0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "59","api_args": { "size": "16" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "60","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b50"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "61","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "62","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1b30"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "63","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ab0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "64","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bd0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "65","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ad0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "66","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "67", "api_args": { "address": "0x9c1a70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "68","api_args": { "size": "4" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "69", "api_args": { "address": "0x9c1b50"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "70", "api_args": { "address": "0x9c1b30"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "71", "api_args": { "address": "0x9c1bd0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "72", "api_args": { "address": "0x9c1a90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "73", "api_args": { "address": "0x9c1ad0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "74", "api_args": { "address": "0x9c1ab0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "75", "api_args": { "address": "0x9c1bb0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "76", "api_args": { "address": "0x9c1bf0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "77", "api_args": { "address": "0x9c1a70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "78","api_args": { "size": "16" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a70"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "79","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bf0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "80","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1bb0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "81","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ab0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "82","api_args": { "size": "24" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1ad0"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "83","api_args": { "size": "1" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "84", "api_args": { "address": "0x9c1a90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "malloc","api_counter": "85","api_args": { "size": "3" },"api_info":{"usable_chunk_size": "24"},"api_return": "0x9c1a90"}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "86", "api_args": { "address": "0x9c1bf0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "87", "api_args": { "address": "0x9c1ab0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "88", "api_args": { "address": "0x9c1bb0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "89", "api_args": { "address": "0x9c1ad0"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "90", "api_args": { "address": "0x9c1a70"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "91", "api_args": { "address": "0x9c1a90"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "92", "api_args": { "address": "0x9c1030"}}
+</hippy-d75d6fc7>
+
+
+
+<hippy-d75d6fc7>
+{"type":"apicall","api_name": "free","api_counter": "93", "api_args": { "address": "0x9c1010"}}
+</hippy-d75d6fc7>
+

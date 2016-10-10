@@ -31,10 +31,10 @@ int first_allocation = 0;
 size_t heap_start_address = NULL;
 size_t heap_end_adddress = NULL;
 int hook_off = 0;
-char *hippy_tag = {"hippy-d75d6fc7"};
+char *hippy_tag = {"heapy-d75d6fc7"};
 int api_counter = 0; //this will be used later for the corrispondence between dumps and logs
 char *envp[] = {0};
-char *argv[] = {"hippy_cmd",NULL};
+char *argv[] = {"heapy_cmd",NULL};
 
 char * tracer_child_binary = {"./tracer_child"};
 char * dumper_binary = {"./readmem"};

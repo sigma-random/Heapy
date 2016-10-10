@@ -1,6 +1,6 @@
-sudo pip install bs4 
+sudo pip install bs4
 sudo apt-get install libc6-dev-i386
 
 sudo su root
 echo 0 > /proc/sys/kernel/yama/ptrace_scope
-su degrigis
+su <your_user>

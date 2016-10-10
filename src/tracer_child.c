@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 char path[30] = {"/proc/"};
-char hippy_tag[30] = {"hippy-d75d6fc7"};
+char hippy_tag[30] = {"heapy-d75d6fc7"};
 
 int main(int argc , char* argv[]){
 

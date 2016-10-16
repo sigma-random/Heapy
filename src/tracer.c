@@ -26,6 +26,8 @@ ready to be allocated.
 #include <unistd.h>
 #include <string.h>
 #include <stdint.h>
+#define DEBUG 1
+
 
 int first_allocation = 0;
 size_t heap_start_address = NULL;
@@ -68,8 +70,7 @@ __attribute__((constructor)) void tracer(){
 // addresses of the heap just allocated
 static void handleFirstAllocation(){
 
-  pid2 = fork(); // we are going to create another process in order to avoid to dirty the heap of
-                          // the current one that we are tracing with allocations derived from fopen and friends!
+  pid2 = fork(); // we are going to create another process in order to avoid to mess the heap of the current traced one
 
   if(pid2 == 0){  // ok son, do the dirty job!
     hook_off = 1;
@@ -85,7 +86,9 @@ static void handleFirstAllocation(){
 */
 void *malloc(size_t size)
 {
-
+#ifdef DEBUG
+fprintf(stderr,"Inside malloc hook");
+#endif
     if(hook_off == 1){
         return real_malloc(size);
     }
@@ -112,6 +115,10 @@ void *malloc(size_t size)
      wait();
    }
 
+   #ifdef DEBUG
+  fprintf(stderr,"returning from malloc hook");
+   #endif
+
     return ret_addr;
 }
 
@@ -120,6 +127,10 @@ void *malloc(size_t size)
 */
 void free(void* addr)
 {
+  #ifdef DEBUG
+  fprintf(stderr,"inside free hook");
+  #endif
+
     if(hook_off == 1){
       return real_free(addr);
     }
@@ -140,6 +151,10 @@ void free(void* addr)
      wait();
    }
 
+   #ifdef DEBUG
+   fprintf(stderr,"returning from free hook");
+   #endif
+
     return;
 }
 
@@ -148,6 +163,11 @@ void free(void* addr)
 */
 void *calloc(size_t nmemb, size_t size)
 {
+  #ifdef DEBUG
+fprintf(stderr,"inside calloc hook");
+  #endif
+
+
     if(hook_off == 1){
       return real_calloc(nmemb,size);
     }
@@ -174,14 +194,21 @@ void *calloc(size_t nmemb, size_t size)
     wait();
   }
 
-    return;
+  #ifdef DEBUG
+  fprintf(stderr,"returning from calloc hook");
+  #endif
+
+    return ret_addr;
 }
 
-/*
- Realloc wrapper
-*/
+
 void *realloc(void* addr, size_t size)
 {
+
+  #ifdef DEBUG
+  fprintf(stderr,"inside realloc hook");
+  #endif
+
     if(hook_off == 1){
       return real_realloc(addr,size);
     }
@@ -216,5 +243,9 @@ void *realloc(void* addr, size_t size)
      wait();
    }
 
-    return;
+   #ifdef DEBUG
+   fprintf(stderr,"returning from realloc hook");
+   #endif
+
+   return ret_addr;
 }

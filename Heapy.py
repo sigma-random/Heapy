@@ -219,7 +219,7 @@ def free(state,api_args,api_info,api_ret,api_counter):
 
 def calloc(state,api_args,api_info,api_ret,api_counter):
     api_args['size'] = str(int(api_args['nmemb'],10) * int(api_args['membsize'],10))
-    state.api_now = "calloc(" + api_args['nmemb'] + "," + api_args['membsize'] + ") = " + api_ret
+    state.api_now = "calloc(" + api_args['nmemb'] + "," + api_args['membsize'] + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)
     if state.dump_name == "":
         state.dump_name = dump_name + api_counter
     if state.libc_dump_name == "":
@@ -245,9 +245,10 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
             except:
                 # we are in the case (1) since there is no chunk after this
                 state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
-                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)
                 state.dump_name = dump_name + api_counter
                 state.libc_dump_name = libc_dump_name + api_counter
+                return
 
             # if state[index+1] is a valid chunk we have to handle this situation
             remaind_size = int(newsize,10) - int(state[index].raw_size,10) # this is how much we need to take from the next chunk
@@ -256,7 +257,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
                 del state[index+1] # if we cover all the chunk we need to remove it
             else:
                 state[index] = Chunk(api_ret,api_args['size'],api_info['usable_chunk_size'],random_color())
-                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
+                state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)
                 state.dump_name = dump_name + api_counter
                 state.libc_dump_name = libc_dump_name + api_counter
 

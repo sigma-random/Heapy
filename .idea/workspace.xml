@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="" />
+    <list default="true" id="006e9637-5d5e-4c38-abe5-9ab9dcc4b292" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/amd64/readmem" afterPath="$PROJECT_DIR$/bin/amd64/readmem" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/amd64/tracer.so" afterPath="$PROJECT_DIR$/bin/amd64/tracer.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/amd64/tracer_child" afterPath="$PROJECT_DIR$/bin/amd64/tracer_child" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/i386/readmem" afterPath="$PROJECT_DIR$/bin/i386/readmem" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/i386/tracer.so" afterPath="$PROJECT_DIR$/bin/i386/tracer.so" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/i386/tracer_child" afterPath="$PROJECT_DIR$/bin/i386/tracer_child" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Heapy.py" afterPath="$PROJECT_DIR$/Heapy.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tracer.c" afterPath="$PROJECT_DIR$/src/tracer.c" />
+    </list>
     <ignored path="Hippy.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,21 +29,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="hippy.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/hippy.py">
+      <file leaf-file-name="Heapy.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Heapy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5868">
-              <caret line="335" column="0" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="hippy_gui_manager.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -51,6 +50,7 @@
         <option value="$PROJECT_DIR$/hippy_coalesc_manager.py" />
         <option value="$PROJECT_DIR$/hippy.py" />
         <option value="$PROJECT_DIR$/hippy_gui_manager.py" />
+        <option value="$PROJECT_DIR$/Heapy.py" />
       </list>
     </option>
   </component>
@@ -70,7 +70,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -83,7 +83,30 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Heapy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Heapy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Heapy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -106,9 +129,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1279" y="0" width="1922" height="1081" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1234375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -143,51 +166,17 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/hippy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6048">
-          <caret line="336" column="0" selection-start-line="336" selection-start-column="0" selection-end-line="336" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hippy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="522">
-          <caret line="32" column="31" selection-start-line="32" selection-start-column="30" selection-end-line="32" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/hippy.py" />
+    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py" />
+    <entry file="file://$PROJECT_DIR$/hippy.py" />
+    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py" />
     <entry file="file://$PROJECT_DIR$/hippy_coalesc_manager.py" />
-    <entry file="file://$PROJECT_DIR$/hippy.py">
+    <entry file="file://$PROJECT_DIR$/hippy.py" />
+    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py" />
+    <entry file="file://$PROJECT_DIR$/Heapy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5868">
-          <caret line="335" column="0" selection-start-line="335" selection-start-column="0" selection-end-line="335" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hippy_gui_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="85" column="0" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
           <folding />
         </state>
       </provider>

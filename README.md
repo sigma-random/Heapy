@@ -35,7 +35,9 @@ Also the current graphic is in testing, the horizontal view of [villoc](https://
 
 ## Thanks
 
-1) 
+1) [readmem](https://github.com/anacrolix/various/blob/e41b93b1b3e2accd540ebdf5d126e7d0fbf7af77/tibia/butox/cutil/readmem.c)
+2) [villoc](https://github.com/wapiflapi/villoc)
+3) [preeny](https://github.com/zardus/preeny)
 
 ## Usage
 

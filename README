@@ -1,51 +1,43 @@
+## What the heck is Heapy?
 
+Heapy is an heap tracer and visualizer for ptmalloc2 based on LD_PRELOAD, it works both for 32 and 64 bit binaries.
 
+## Why Heapy?
 
+Heapy borns with [villoc](https://github.com/wapiflapi/villoc) in mind. However , nonetheless I found [villoc](https://github.com/wapiflapi/villoc) very useful, I've always felt "blind" while using it. I mean: I am visualizing the heap chunks allocated, but in order to see inside them I have no other choice to use gdb...
 
+Starting from this I thought: "Why not track the heap allocation functions and also dump the heap?". That's basically the core idea behind Heapy: track heap functions, dump the heap and correlate the info about the dump with the state of the heap.
 
-[1]-What the heck is hippy?
+Oh, and Heapy also dumps the malloc_state struct in memory! 
 
-Hippy is a heap visualizer tool for ptmalloc2 based on LD_PRELOAD, it works both for 32 and 64 bit binaries.
+What does it means? 
 
-[2]-Why I bother?
-
-Hippy can be useful, as villoc, to track heap memory allocations of CTF challenges, you don't have to draw rectangles on a paper anymore!
-I personally find it great. At least I don't waste paper...
-
-[3]-So, it is a villoc duplicate?
-
-Not really, I found villoc very useful, but I always felt "blind" while using it. I mean: I see this nice rectangles, but if I want to see inside them
-I have no choice rather than summon gdb. 
-Starting from this idea I thought: "Why not track the heap allocation functions and also dump the heap?". That's basically the idea 
-behind hippy: track heap functions + dump heap.
-Oh, and hippy also dumps the malloc_state struct in memory! What does it means? You can see the free-list bins working live! It is a really good way to learn fastly 
+You can see the free-list bins working live! It is a really good way to learn fastly 
 how the free-list mechanism works in ptmalloc2.
 
-[4]- Ok, how it works?
+## How it works?
 
-villoc relies basically on ltrace. Hippy relies on a preloaded library that replaces our friends malloc,calloc,realloc,free with our custom functions.
-It is basically the malloctracer inside the preeny suite ( by Zardus )...but on steroids.
- 
-[5]- How can you be sure that the dump of the heap is equal to the original program not "instrumented"?
+While [villoc](https://github.com/wapiflapi/villoc) relies basically on ltrace. Hippy relies on a preloaded library (well, LD_PRELOAD) that replaces our friends malloc,calloc,realloc,free with our custom functions.
+It works basically as the malloctracer inside [preeny](https://github.com/zardus/preeny)...but on steroids.
 
-The dumping of the target program heap is delegated to a child process spawned with a fork that is heap-allocation-free 
-( this means that it doesn't make use of the heap ). Also since I don't want to perturb too much the stack of the original programs, I've decided
-to keep all variables global ( so in the .data or .bss of the loaded library ) and avoid calls to other functions.
+## Note
 
-[6]- All this mess only to visualize stuff? What's wrong with you?
+The current version of Heapy is a dirty and incomplete beta, but it should works well with libc 2.19 and 2.23.
 
-I really like to visualize stuff, expecially while writing exploits I love to design schemas on how memory behaves and see with my eyes the "macabre dance"
-of the target program while being exploited. Visualize stuff is the key to learn things, expecially in this area of computer security. 
+I'm planning to add lots of new functionalities as for example tracking allocation errors ( that could be really useful during heap exploitation ), better correlation between the chunks and the dump etc...
 
-[7]- Ok stop, I want to try it, how?
+Also the current graphic is in testing, the horizontal view of [villoc](https://github.com/wapiflapi/villoc) sometimes fits better rather than my vertical one. Feedbacks are really appreciated! 
+
+
+## Screenshots
 
 
 
+## Thanks
 
-Hippy is currently under development, it should works well with libc:.....
-Any kind of contribution is really appreciated ( especially on the html graphics because, holy shit, I suck! )
+1) 
 
+## Usage
 
-Oh, screenshots:
-
+[TODO]
 

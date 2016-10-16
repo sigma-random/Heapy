@@ -31,7 +31,11 @@ Also the current graphic is in testing, the horizontal view of [villoc](https://
 
 ## Screenshots
 
+![alt tag](http://i.imgur.com/E7o2psg.png)
 
+![alt tag](http://i.imgur.com/oUs0UKN.png)
+
+![alt tag](http://i.imgur.com/4m2wgdt.png)
 
 ## Thanks
 

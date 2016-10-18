@@ -6,6 +6,12 @@ import pdb
 import math
 from HeapyLibcFormatter import *
 
+# configurable parameter libc-version dependent
+# these are the lines to take in order to retrieve the malloc_state
+# from the libc data segment
+# f.i. 2.23-32 is the libc 2.23 on 32 bit, 61-96 means that from line 61 to 95 of the hexdump we have the info about bins
+supported_libc = {"2.19-64": "60-128", "2.23-32": "61-95" , "2.23-64": "89-158"}
+
 class HeapyGuiManager:
 
     def __init__(self,number_of_states):

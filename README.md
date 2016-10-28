@@ -43,6 +43,17 @@ Also the current graphic is in testing, the horizontal view of [villoc](https://
 
 3) [preeny](https://github.com/zardus/preeny)
 
+## Requirements
+
+1)pip install bs4
+
+2)apt-get install libc6-dev-i386
+
+3)Also remember to enable ptrace: ( do this in a vm or remember to disable it after the analysis ) 
+   - sudo su root
+   - echo 0 > /proc/sys/kernel/yama/ptrace_scope
+   - su <your user>
+   
 ## Usage
 
 [TODO]

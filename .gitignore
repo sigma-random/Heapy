@@ -2,3 +2,4 @@ test/
 bin/
 demo/
 .idea/
+*.swp

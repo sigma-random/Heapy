@@ -9,8 +9,8 @@ from HeapyLibcFormatter import *
 class HeapyGuiManager:
 
     def __init__(self,number_of_states):
-        self.html_report_base = "./gui/report_base.html" # base html to modify in order to draw the current state
-        self.html_report_folder = "./StateHtmlReports" # this folder will contains all the html generated that describe a state
+        self.html_report_base = "./report_base.html" # base html to modify in order to draw the current state
+        self.html_report_folder = "./HeapReport" # this folder will contains all the html generated that describe a state
         self.html_report_current_name = "heapstate_X"  # this will be the name of the generated html report
         self.html_report_counter = 1
         self.heap_dump_folder = "./HeapDumps/"

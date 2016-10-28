@@ -14,7 +14,7 @@ tag_heapy_end   = "</heapy-d75d6fc7>"
 dump_name       = "heap_dump_"
 libc_dump_name  = "libc_dump_"
 libc_dump_path  = "./LibcDumps/"
-gui_path        = "/home/degrigis/Project/Heapy/gui/base2.html"
+gui_path        = "./gui/report_base.html"
 
 api_call_json = []
 proc_info_json = None

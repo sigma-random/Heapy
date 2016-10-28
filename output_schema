@@ -1,5 +1,5 @@
 
-<hippy-d75d6fc7>
+<heapy-d75d6fc7>
 {
   "type": "procinfo",
   "heap_range": {
@@ -12,10 +12,10 @@
   },
   "arch": "64"
 }
-</hippy-d75d6fc7>
+</heapy-d75d6fc7>
 
 
-<hippy-d75d6fc7>
+<heapy-d75d6fc7>
 {
   "type": "apicall",
   "api_name": "malloc",
@@ -28,10 +28,10 @@
   },
   "api_return": "0x08044444"
 }
-</hippy-d75d6fc7>
+</heapy-d75d6fc7>
 
 
-<hippy-d75d6fc7>
+<heapy-d75d6fc7>
 {
   "type": "apicall",
   "api_name": "free",
@@ -40,10 +40,10 @@
     "address": "0x08065456"
   }
 }
-</hippy-d75d6fc7>
+</heapy-d75d6fc7>
 
 
-<hippy-d75d6fc7>
+<heapy-d75d6fc7>
 {
   "type": "apicall",
   "api_name": "calloc",
@@ -57,10 +57,10 @@
   },
   "api_return": "0x08044444"
 }
-</hippy-d75d6fc7>
+</heapy-d75d6fc7>
 
 
-<hippy-d75d6fc7>
+<heapy-d75d6fc7>
 {
   "type": "apicall",
   "api_name": "realloc",
@@ -81,4 +81,4 @@
   },
   "api_return": "0x080455564"
 }
-</hippy-d75d6fc7>
+</heapy-d75d6fc7>

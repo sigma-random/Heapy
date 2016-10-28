@@ -1,4 +1,3 @@
-./test/
-./bin/i386/*
-./bin/amd64/*
-./demo/*
+test/
+bin/
+demo/

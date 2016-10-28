@@ -17,7 +17,7 @@ how the free-list mechanism works in ptmalloc2.
 
 ## How it works?
 
-While [villoc](https://github.com/wapiflapi/villoc) relies basically on ltrace. Hippy relies on a preloaded library (well, LD_PRELOAD) that replaces our friends malloc,calloc,realloc,free with our custom functions.
+While [villoc](https://github.com/wapiflapi/villoc) relies basically on ltrace, Heapy exploits LD_PRELOAD to preload a library that replaces our friends malloc,calloc,realloc,free with our custom functions.
 It works basically as the malloctracer inside [preeny](https://github.com/zardus/preeny)...but on steroids.
 
 ## Note

@@ -39,6 +39,8 @@ It works basically as the malloctracer inside [preeny](https://github.com/zardus
 
 3) Move cloned folder in your preferred location.
 
+4) cd /Heapy/src & ./BUILD.sh
+
 4) Change the variable HEAPY_PATH inside the file GoHeapy.py with the folder where you have copied the cloned repo.
    - example: HEAPY_PATH = "/home/degrigis/Project/Heapy"
 

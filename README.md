@@ -22,9 +22,9 @@ It works basically as the malloctracer inside [preeny](https://github.com/zardus
 
 ## Requirements
 
-1)pip install bs4
+1)sudo pip install bs4
 
-2)apt-get install libc6-dev-i386
+2)sudo apt-get install libc6-dev-i386
 
 3)Also remember to enable ptrace: ( do this in a vm or remember to disable it after the analysis ) 
    - sudo su root
@@ -33,13 +33,21 @@ It works basically as the malloctracer inside [preeny](https://github.com/zardus
 
 ## Usage
 
-1)
+1) git clone https://github.com/degrigis/Heapy.git
+2) Install requirements if needed.
+3) Move cloned folder in your preferred location.
+4) Change the variable HEAPY_PATH inside the file GoHeapy.py with the folder where you have copied the cloned repo.
+   - example: HEAPY_PATH = "/home/degrigis/Project/Heapy"
+5) Now copy GoHeapy.py in the same folder of the program you want to trace and launch:
+   - python GoHeapy.py ./program-traced 
+   OR 
+   - python GoHeapy.py ./program-traced ./input.txt ( this if you have an input file )
+6) If all ok you should see a folder called HeapReport that will contains some html.
+7) Open the first html file. Now you can navigate between the report using the key arrows. :-)
 
 ## Screenshots
 
 ![alt tag](http://i.imgur.com/E7o2psg.png)
-![alt tag](http://i.imgur.com/oUs0UKN.png)
-![alt tag](http://i.imgur.com/4m2wgdt.png)
 
 ## Note
 

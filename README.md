@@ -44,7 +44,9 @@ It works basically as the malloctracer inside [preeny](https://github.com/zardus
 
 5) Now copy GoHeapy.py in the same folder of the program you want to trace and launch:
    - python GoHeapy.py ./program-traced 
+
    OR 
+
    - python GoHeapy.py ./program-traced ./input.txt ( this if you have an input file )
 
 6) If all ok you should see a folder called HeapReport that will contains some html.

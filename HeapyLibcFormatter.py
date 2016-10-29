@@ -6,8 +6,8 @@ import pdb
 
 class HeapyLibcFormatter:
     def __init__(self,libc_dump_full_path,proc_info,soup):
-        self.supported_libc = {"2.19-64": "60-128", "2.23-64": "90-158", "2.23-32": "61-95"}
-        self.formatter_dictionary = {"2.19-64": self.formatter_1 , "2.23-64": self.formatter_1, "2.23-32": self.formatter_2}
+        self.supported_libc = {"2.19-64": "60-128", "2.19-32": "34-68", "2.23-64": "90-158", "2.23-32": "61-95"}
+        self.formatter_dictionary = {"2.19-64": self.formatter_1 , "2.23-64": self.formatter_1, "2.23-32": self.formatter_2, "2.19-32": self.formatter_2}
         self.libc_dump_full_path = libc_dump_full_path
         self.proc_info = proc_info
         self.soup = soup
@@ -158,7 +158,6 @@ class HeapyLibcFormatter:
             div_space = self.soup.new_tag('div')
             div_space['style'] = "font-size:0;height:5px;"
             div_libcdump.append(div_space)
-            line = line[2:]
             small_bin_bk = self.soup.new_tag('div')
             small_bin_bk['style'] = "font-family: monospace;display:inline;"
             small_bin_bk.string = "smallbin["+str(i)+"]{bk}-> 0x" + line[1]
@@ -182,7 +181,6 @@ class HeapyLibcFormatter:
                 div_space = self.soup.new_tag('div')
                 div_space['style'] = "font-size:0;height:5px;"
                 div_libcdump.append(div_space)
-                line = line[2:]
                 large_bin_bk = self.soup.new_tag('div')
                 large_bin_bk['style'] = "font-family: monospace;display:inline;"
                 large_bin_bk.string = "largebin["+str(i)+"]{bk}-> 0x" + line[1]

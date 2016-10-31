@@ -1,6 +1,6 @@
 ## What the heck is Heapy?
 
-Heapy is an heap tracer and visualizer for ptmalloc2 based on LD_PRELOAD, it works both for 32 and 64 bit binaries.
+Heapy is an heap tracer and visualizer for the glibc’s malloc implementation based on LD_PRELOAD, it works both for 32 and 64 bit binaries.
 
 ## Why Heapy?
 

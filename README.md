@@ -18,7 +18,7 @@ how the free-list mechanism works.
 ## How it works?
 
 While [villoc](https://github.com/wapiflapi/villoc) relies basically on ltrace, Heapy exploits LD_PRELOAD to preload a library that replaces our friends malloc,calloc,realloc,free with our custom functions.
-It works basically as the malloctracer inside [preeny](https://github.com/zardus/preeny)...but on steroids.
+It works basically as the mallocwatch inside [preeny](https://github.com/zardus/preeny)...but on steroids.
 
 ## Requirements
 

@@ -13,7 +13,7 @@ Oh, and Heapy also dumps the malloc_state struct in memory!
 What does it means? 
 
 You can see the free-list bins working live! It is a really good way to learn fastly 
-how the free-list mechanism works in ptmalloc2.
+how the free-list mechanism works.
 
 ## How it works?
 

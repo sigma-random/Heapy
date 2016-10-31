@@ -53,7 +53,7 @@ It works basically as the malloctracer inside [preeny](https://github.com/zardus
 
 6) If all ok you should see a folder called HeapReport that will contains some html.
 
-7) Open the first html file. Now you can navigate between the report using the key arrows. :-)
+7) Open the first html file. Now you can navigate between the report using the arrow keys. :-)
 
 ## Screenshots
 

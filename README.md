@@ -55,6 +55,8 @@ It works basically as the mallocwatch inside [preeny](https://github.com/zardus/
 
 7) Open the first html file. Now you can navigate between the report using the arrow keys. :-)
 
+NOTE: The current implementation of Heapy supports visualization for libc 2.19 and 2.23 ( 32 and 64 bits ).
+
 ## Screenshots
 
 ![alt tag](http://i.imgur.com/E7o2psg.png)

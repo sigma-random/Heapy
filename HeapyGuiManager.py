@@ -11,10 +11,11 @@ class HeapyGuiManager:
     def __init__(self,number_of_states):
         self.html_report_base = "./report_base.html" # base html to modify in order to draw the current state
         self.html_report_folder = "./HeapReport" # this folder will contains all the html generated that describe a state
-        self.html_report_current_name = "heapstate_X"  # this will be the name of the generated html report
+        self.html_report_current_name = "heapstate_X.html"  # this will be the name of the generated html report
         self.html_report_counter = 1
         self.heap_dump_folder = "./HeapDumps/"
         self.libc_dump_folder = "./LibcDumps/"
+	self.context_dump_folder = "./ContextDumps/"
         self.current_state_obj = "" # passed later in the run method
         self.current_state_heap_dump = "" # passed later in the run method
         self.current_state_libc_dump = "" # passed later in the run method
@@ -42,20 +43,21 @@ class HeapyGuiManager:
         self.build_heap_state()
         self.paste_heap_dump(self.current_state_obj,proc_info)
         self.paste_libc_dump(self.current_state_obj,proc_info)
+	self.paste_context_dump(self.current_state_obj,proc_info)
 
         # a pinch of javascript for better navigation between reports
 
         div_script = self.soup.find(id="lolscripts")
 
         if self.html_report_counter > self.number_of_states:
-            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + "\";}"
+            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + ".html\";}"
         else:
-            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter) + "\";}"
+            javascript_next = "function next_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter) + ".html\";}"
 
         if self.html_report_counter-1 == 1:
-            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + "\";}"
+            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-1) + ".html\";}"
         else:
-            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-2) + "\";}"
+            javascript_prev = "function prev_page(){ window.location.href = \"./heapstate_" + str(self.html_report_counter-2) + ".html\";}"
 
         div_script.append(javascript_next)
         div_script.append(javascript_prev)
@@ -74,7 +76,8 @@ class HeapyGuiManager:
     def write_generic_info(self,prev_state,next_state):
         div_info = self.soup.find(id="ginfo") # insert the name of the api now
         center_text = self.soup.new_tag('center')
-        ginfo = "heap-range:   " + self.proc_info.heap_start_address + " - " + self.proc_info.heap_end_address + " | " + "libc-range:   " + self.proc_info.libc_start_address + " - " + self.proc_info.libc_end_address + " | " + "libc-version: " + self.proc_info.libc_version
+        ginfo = "heap-range:   " + self.proc_info.heap_start_address + " - " + self.proc_info.heap_end_address + " | " + "libc-range:   " + self.proc_info.libc_start_address + " - " + self.proc_info.libc_end_address + " | " + "libc-version: " + self.proc_info.libc_version 
+	
         center_text.string = ginfo
 
         div_info.append(center_text)
@@ -260,3 +263,12 @@ class HeapyGuiManager:
         libc_dump_full_path = self.libc_dump_folder + state.libc_dump_name
         heapy_libc_formatter = HeapyLibcFormatter(libc_dump_full_path,proc_info,self.soup)
         heapy_libc_formatter.format()
+
+
+    def paste_context_dump(self,state,proc_info):
+        context_dump_full_path = self.context_dump_folder + state.context_dump_name
+	old_div_string = self.soup.find(id="ginfo").text
+        new_ginfo = open(context_dump_full_path,"r").read()
+	node = self.soup.find(id="ginfo")
+        node.insert(2,"\n" + new_ginfo)
+	

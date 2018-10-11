@@ -8,12 +8,9 @@ mv ./tracer_child ../bin/i386/tracer_child
 mv ./readmem ../bin/i386/readmem
 '
 
-gcc -shared -fPIC -Wl,-z,relro,-z,now -o tracer.so tracer.c -ldl -lunwind-ptrace -lunwind -lunwind-x86_64 -lunwind-setjmp -lunwind-generic -lunwind-coredump
-
-gcc -Wl,-z,relro,-z,now -o tracer_child tracer_child.c -lunwind-ptrace -lunwind -lunwind-x86_64 -lunwind-setjmp -lunwind-generic -lunwind-coredump
-
-gcc -Wl,-z,relro,-z,now -o readmem readmem.c -lunwind-ptrace -lunwind -lunwind-x86_64 -lunwind-setjmp -lunwind-generic -lunwind-coredump
-
+gcc -shared -fPIC -Wl,-z,relro,-z,now -o tracer.so tracer.c -ldl -lunwind-ptrace
+gcc -Wl,-z,relro,-z,now -o tracer_child tracer_child.c -lunwind-ptrace
+gcc -Wl,-z,relro,-z,now -o readmem readmem.c -lunwind-ptrace
 mkdir -p ../bin/amd64/
 mv ./tracer.so ../bin/amd64/tracer.so
 mv ./tracer_child ../bin/amd64/tracer_child

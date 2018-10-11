@@ -18,6 +18,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <sys/user.h>
+#include <sys/reg.h>
+
+#include <libunwind-ptrace.h>
 
 #ifdef NDEBUG
 #	define verify(expr) (((void)(0))(expr))

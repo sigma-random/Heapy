@@ -13,7 +13,9 @@ tag_heapy_start = "<heapy-d75d6fc7>"
 tag_heapy_end   = "</heapy-d75d6fc7>"
 dump_name       = "heap_dump_"
 libc_dump_name  = "libc_dump_"
+context_dump_name = "context_dump_"
 libc_dump_path  = "./LibcDumps/"
+context_dump_path = "./ContextDumps/"
 gui_path        = "./report_base.html"
 
 api_call_json = []
@@ -51,8 +53,10 @@ class State(list):
   self.fastchunks_bit = 1 # this bit is used internally by ptmalloc in order to understand if there are fastbin freed in memory
   self.dump_name = "" # this in order to correlate a State with a taken dump
   self.libc_dump_name = ""
+  self.context_dump_name = ""
   self.color = []
   self.last_heap_address = "0" # the highest address reached by the heap
+  self.context = ""
   return
 
  def getChunkAt(self,address):
@@ -68,7 +72,7 @@ class State(list):
      return -1,None # well, again, chunk not found
 
  def __str__(self):
-     repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n[+]libc_dump_name: " + self.libc_dump_name + "\n"
+     repr = "********State********\n" + "[+]info: " + self.api_now + "\n[+]dump_name: " + self.dump_name + "\n[+]libc_dump_name: " + self.libc_dump_name +  "\n[+]context_dump_name: " + self.context_dump_name + "\n"
      for chunk in self:
          repr+=chunk.__str__()
      repr+= "*********************\n"
@@ -190,11 +194,13 @@ def malloc(state,api_args,api_info,api_ret,api_counter):
 
     if state.api_now == "":
         state.api_now = "malloc(" + api_args['size'] + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)  # keep track of the api called in this state
+    
     if state.dump_name == "":
         state.dump_name = dump_name + api_counter
     if state.libc_dump_name == "":
         state.libc_dump_name = libc_dump_name + api_counter
-
+    if state.context_dump_name == "":
+        state.context_dump_name = context_dump_name + api_counter
 
 def free(state,api_args,api_info,api_ret,api_counter):
     freed_address = api_args['address']
@@ -216,6 +222,8 @@ def free(state,api_args,api_info,api_ret,api_counter):
             state.dump_name = dump_name + api_counter
         if state.libc_dump_name == "":
             state.libc_dump_name = libc_dump_name + api_counter
+        if state.context_dump_name == "":
+            state.context_dump_name = context_dump_name + api_counter
 
 def calloc(state,api_args,api_info,api_ret,api_counter):
     api_args['size'] = str(int(api_args['nmemb'],10) * int(api_args['membsize'],10))
@@ -224,6 +232,8 @@ def calloc(state,api_args,api_info,api_ret,api_counter):
         state.dump_name = dump_name + api_counter
     if state.libc_dump_name == "":
         state.libc_dump_name = libc_dump_name + api_counter
+    if state.context_dump_name == "":
+        state.context_dump_name = context_dump_name + api_counter
     malloc(state,api_args,api_info,api_ret,None)
 
 def realloc(state,api_args,api_info,api_ret,api_counter):
@@ -248,6 +258,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
                 state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)
                 state.dump_name = dump_name + api_counter
                 state.libc_dump_name = libc_dump_name + api_counter
+	        state.context_dump_name = context_dump_name + api_counter
                 return
 
             # if state[index+1] is a valid chunk we have to handle this situation
@@ -260,7 +271,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
                 state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + hex(int(api_ret,16)-procInfo.getArchMutiplier() * 4)
                 state.dump_name = dump_name + api_counter
                 state.libc_dump_name = libc_dump_name + api_counter
-
+	        state.context_dump_name = context_dump_name + api_counter
                 remainder_raw_size = int(next_chunk.full_chunk_size,10) - remaind_size
 
                 remainder_addr = hex(int(next_chunk.raw_addr,16) + remaind_size + 4 * procInfo.getArchMutiplier() + 1)
@@ -273,6 +284,7 @@ def realloc(state,api_args,api_info,api_ret,api_counter):
             state.api_now = "realloc(" + address_to_realloc + "," + newsize + ") = " + api_ret
             state.dump_name = dump_name + api_counter
             state.libc_dump_name = libc_dump_name + api_counter
+	    state.context_dump_name = context_dump_name + api_counter
             free(state,new_api_args,None,None,None)
             malloc(state,api_args,api_info,api_ret,None)
 
@@ -371,6 +383,7 @@ def buildTimeline():
         state.api_now = ""
         state.dump_name = ""
         state.libc_dump_name = ""
+	state.context_dump_name = ""
         state.info = []
         state.errors = []
         op(state,api_args,api_info,api_ret,api_counter)

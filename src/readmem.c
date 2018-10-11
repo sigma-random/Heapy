@@ -1,9 +1,11 @@
 #include "botutil.h"
 
+
 #define BLOCK_SIGNALS 1
 
 char heap_dump_filename[40]  = {0};
 char libc_dump_filename[40]  = {0};
+char context_dump_filename[40] = {0};
 char dump_index_string[10]  = {0};
 char start_heap[30] = {0};
 char end_heap[30] = {0};
@@ -24,14 +26,20 @@ int main(int argc, char **argv)
 {
 	strncpy(heap_dump_filename,"./HeapDumps/heap_dump_",22);
 	strncpy(libc_dump_filename,"./LibcDumps/libc_dump_",22);
+	strncpy(context_dump_filename,"./ContextDumps/context_dump_",28);
 
 	if (stat("./HeapDumps", &st) == -1) {
-    mkdir("./HeapDumps", 0700);
+    		mkdir("./HeapDumps", 0700);
 	}
 
 	if (stat("./LibcDumps", &st) == -1) {
 		mkdir("./LibcDumps", 0700);
 	}
+	
+	if (stat("./ContextDumps", &st) == -1) {
+		mkdir("./ContextDumps", 0700);
+	}
+
 
 	FILE *heap_log = fopen("./heap_log","r"); // let's open the heap_log in order to retrieve the heap range
 	fscanf(heap_log,"%s",s_pid);
@@ -62,10 +70,11 @@ int main(int argc, char **argv)
 
 	strcat(heap_dump_filename,dump_index_string); // compose the name of the dump for the heap
 	strcat(libc_dump_filename,dump_index_string); // compose the name of the dump for the libc
+	strcat(context_dump_filename,dump_index_string); // compose the name of the dump for the context 
 
 	pid_t const pid = atoi(s_pid);
 	size_t heap_start_value = strtoull(start_heap, NULL, 16);
-  size_t heap_end_value   = strtoull(end_heap, NULL, 16);
+  	size_t heap_end_value   = strtoull(end_heap, NULL, 16);
 	size_t libc_start_value = strtoul(start_libc,NULL,16);
 	size_t libc_end_value = strtoul(end_libc,NULL,16);
 
@@ -125,7 +134,6 @@ int main(int argc, char **argv)
 #if defined(BLOCK_SIGNALS)
 	verify(0 == sigprocmask(SIG_SETMASK, &oldset, NULL));
 #endif
-
 	int memfd = open(mempath, O_RDONLY);
 	assert(memfd != -1);
 
@@ -186,6 +194,33 @@ int main(int argc, char **argv)
 			}
 	}
 
+	
+	dump_file = fopen(context_dump_filename, "a");
+	
+	unw_addr_space_t as = unw_create_addr_space(&_UPT_accessors, 0);
+	
+	void *context = _UPT_create(pid);
+	unw_cursor_t cursor;
+	if (unw_init_remote(&cursor, as, context) != 0)
+		printf("ERROR: cannot initialize cursor for remote unwinding\n");
+
+	do {
+		unw_word_t offset, pc;
+		char sym[4096];
+		if (unw_get_reg(&cursor, UNW_REG_IP, &pc))
+			printf("ERROR: cannot read program counter\n");
+
+		//printf("0x%lx: ", pc);
+
+		if (unw_get_proc_name(&cursor, sym, sizeof(sym), &offset) == 0)
+			fprintf(dump_file,"(%s+0x%lx)\n", sym, offset);
+		else
+			fprintf(dump_file,"-- no symbol name found\n");
+	} while (unw_step(&cursor) > 0);
+
+	_UPT_destroy(context);
+
+ 
 	fclose(dump_file);
 	free(mempath);
 	

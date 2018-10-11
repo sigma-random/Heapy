@@ -2,3 +2,10 @@
 4- evidenziare situazione in cui un chunk viene allocato su indirizzi diversi da heap range ( stack-house of force, allarme vicino alla malloc )
 6- documentazione e refactoring di pattumiera ( new_name-> heapy )
 
+
+
+
+KNOWN BUGS:
+
+1- When wilderness eats all the heap the colors are not restored anymore 
+2- dumping of the context is not perfect ( there are some corner cases to handle )

@@ -1,0 +1,10 @@
+
+To install libunwind:
+
+
+1- Download the library from https://www.nongnu.org/libunwind/download.html
+2- ./configure
+3- sudo make && sudo make install 
+4- move all the .so generated inside /home/degrigis/Downloads/libunwind-1.3-rc1/src/x86_64 in /usr/lib
+5- compile with the correct compiler's flag
+6- -lunwind-ptrace -lunwind -lunwind-x86_64 -lunwind-setjmp -lunwind-generic -lunwind-coredump they already are inside the BUILD.sh 
